@@ -1,0 +1,1837 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Бид хоёрын булан</title>
+<meta name="description" content="Зөвхөн бид хоёрт зориулсан булан: зураг, нууц захидал, дуунууд, хүслүүд.">
+<link rel="stylesheet" href="./fonts/fonts.css">
+<meta name="theme-color" content="#030504">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="Бид хоёр">
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="./favicon.svg">
+<link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png">
+<link rel="apple-touch-icon" href="./icon-180.png">
+<link rel="manifest" href="./manifest.webmanifest">
+<style>
+:root{--u:min(calc(100vw/1600),calc(100vh/900));--cream:#f5efe2;--line:rgba(245,239,226,.16);--soft:rgba(245,239,226,.62);--head:Antonio,Oswald,"Arial Narrow",sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#000;overflow:hidden}
+body{color:var(--cream);font-family:Manrope,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+[hidden]{display:none!important}
+#valley{position:fixed;inset:0;touch-action:none}
+.js-canvas-container{position:absolute;inset:0}
+.js-canvas-container canvas{display:block;width:100%!important;height:100%!important}
+.ui{position:fixed;inset:0;z-index:2;pointer-events:none;opacity:0;transition:opacity 1.6s ease}
+.ui.on{opacity:1}
+.ui a,.ui button,.ui input,.ui textarea,.ui select,.ui label,.panel,.modal{pointer-events:auto}
+header{position:absolute;left:0;right:0;top:0;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:calc(24*var(--u)) calc(44*var(--u)) 0;z-index:3}
+.logo{font-size:calc(26*var(--u));font-weight:500;letter-spacing:-.02em;white-space:nowrap}
+.ui nav{display:flex;align-items:center;gap:calc(28*var(--u));font-size:calc(14.5*var(--u));font-weight:500;letter-spacing:.16em;text-transform:uppercase}
+.ui nav a:not(.pill){transition:opacity .2s;opacity:.8;position:relative}.ui nav a:not(.pill):hover{opacity:1}
+.ui nav a.cur:not(.pill){opacity:1}.ui nav a.cur:not(.pill)::after{content:"";position:absolute;left:0;right:.16em;bottom:-8px;height:1px;background:var(--cream)}
+.pill{display:inline-flex;align-items:center;height:calc(46*var(--u));padding:0 calc(26*var(--u));border-radius:99px;background:var(--cream);color:#151510;transition:transform .25s;white-space:nowrap}
+.pill:hover{transform:translateY(-1px)}
+.hero{position:absolute;left:0;right:0;top:50%;transform:translateY(-46%);display:flex;flex-direction:column;align-items:center;text-align:center;transition:opacity .6s ease,transform .8s ease}
+.hero.away{opacity:0;transform:translateY(-40%);pointer-events:none}
+.hero.away *{pointer-events:none!important}
+h1{text-shadow:0 2px 30px rgba(0,0,0,.45);font:400 calc(158*var(--u))/.92 var(--head);letter-spacing:-.012em;white-space:nowrap}
+.cap{text-shadow:0 1px 14px rgba(0,0,0,.95),0 0 4px rgba(0,0,0,.8);margin-top:calc(44*var(--u));font-size:calc(20*var(--u));line-height:1.45}
+.cap b{font-weight:600}
+.clocks{background:rgba(0,0,0,.42);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:8px 16px;border-radius:99px;display:flex;gap:calc(28*var(--u));margin-top:calc(22*var(--u));font-size:calc(13*var(--u));letter-spacing:.14em;text-transform:uppercase;color:var(--soft)}
+.clocks span b{color:var(--cream);font-weight:500;letter-spacing:.06em}
+.clocks i{width:1px;background:var(--line)}
+.clocks button.nm{font:inherit;letter-spacing:inherit;text-transform:inherit;color:inherit;border-bottom:1px dashed rgba(245,239,226,.45);padding:0}
+.go{background:rgba(0,0,0,.45);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:grid;place-items:center;margin-top:calc(30*var(--u));width:calc(58*var(--u));height:calc(58*var(--u));border:1.5px solid var(--cream);border-radius:50%;transition:background .3s,color .3s,transform .2s}
+.go:hover{background:var(--cream);color:#151510}.go:active{transform:scale(.92)}
+.go svg{width:calc(22*var(--u));height:calc(22*var(--u));fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.miss{background:rgba(0,0,0,.42);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:6px 14px;border-radius:99px;margin-top:calc(14*var(--u));font-size:calc(13*var(--u));color:var(--soft);min-height:1.4em}
+.corner{position:absolute;right:calc(44*var(--u));bottom:calc(44*var(--u));display:flex;align-items:center;gap:calc(18*var(--u));font-size:calc(12.5*var(--u));font-weight:500;letter-spacing:.16em;text-transform:uppercase;z-index:3}
+.corner i{width:1px;height:calc(26*var(--u));background:rgba(245,239,226,.45)}
+.sound{display:grid;place-items:center;width:calc(28*var(--u));height:calc(28*var(--u))}
+.sound svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.sound .w,.sound .x{transition:opacity .3s}.sound[aria-pressed=false] .w{opacity:0}.sound[aria-pressed=true] .x{opacity:0}
+.loader{position:fixed;inset:0;z-index:9;display:grid;place-items:center;background:#000;transition:opacity 1s ease;pointer-events:none}
+.loader.gone{opacity:0}
+.loader span{width:calc(9*var(--u));height:calc(9*var(--u));min-width:6px;min-height:6px;border-radius:50%;background:var(--cream);animation:pulse 1.2s ease-in-out infinite}
+@keyframes pulse{50%{transform:scale(.4);opacity:.4}}
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--cream);outline-offset:3px}
+
+/* panels */
+.panel{position:absolute;left:50%;top:calc(110*var(--u) + 24px);bottom:calc(110*var(--u) + 10px);width:min(1040px,calc(100vw - 48px));transform:translate(-50%,12px);opacity:0;visibility:hidden;transition:opacity .5s ease,transform .6s ease,visibility 0s .6s;display:flex;flex-direction:column;background:rgba(8,10,14,.58);backdrop-filter:blur(20px) saturate(1.2);-webkit-backdrop-filter:blur(20px) saturate(1.2);border:1px solid var(--line);border-radius:24px;overflow:hidden;z-index:2}
+.panel.open{opacity:1;visibility:visible;transform:translate(-50%,0);transition:opacity .5s ease,transform .6s ease,visibility 0s}
+.ph{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;padding:26px 30px 18px;border-bottom:1px solid var(--line)}
+.ph h2{font:400 clamp(30px,3.6vw,46px)/1 var(--head);letter-spacing:-.005em}
+.ph p{color:var(--soft);font-size:14px;margin-top:8px;max-width:560px;line-height:1.5}
+.pb{flex:1;overflow:auto;padding:22px 30px 34px;overscroll-behavior:contain;touch-action:pan-y}
+.pb::-webkit-scrollbar{width:8px}.pb::-webkit-scrollbar-thumb{background:rgba(245,239,226,.18);border-radius:8px}
+.close{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;flex:none;transition:background .2s}
+.close:hover{background:rgba(245,239,226,.1)}
+.close svg{width:16px;height:16px;stroke:currentColor;stroke-width:1.6;fill:none;stroke-linecap:round}
+.note{font-size:13.5px;color:var(--soft);padding:12px 16px;border:1px dashed var(--line);border-radius:14px;margin-bottom:18px;line-height:1.5}
+.empty{color:var(--soft);font-size:15px;padding:40px 0;text-align:center;line-height:1.6}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.field{display:flex;flex-direction:column;gap:6px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--soft)}
+input[type=text],input[type=password],input[type=date],input[type=url],textarea,select{font:inherit;font-size:15px;color:var(--cream);background:rgba(245,239,226,.06);border:1px solid var(--line);border-radius:12px;padding:11px 14px;outline:none;transition:border-color .2s;width:100%;text-transform:none;letter-spacing:0}
+input:focus,textarea:focus{border-color:rgba(245,239,226,.5)}
+input::placeholder,textarea::placeholder{color:rgba(245,239,226,.38)}
+input[type=date]{color-scheme:dark}
+textarea{resize:vertical;min-height:160px;line-height:1.6}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:44px;padding:0 22px;border-radius:99px;background:var(--cream);color:#151510;font-weight:600;font-size:14px;white-space:nowrap;transition:transform .2s,opacity .2s}
+.btn:hover{transform:translateY(-1px)}.btn:disabled{opacity:.45;cursor:default;transform:none}
+.btn.ghost{background:transparent;color:var(--cream);border:1px solid var(--line)}
+.btn.ghost:hover{background:rgba(245,239,226,.08)}
+.meta{font-size:12px;color:var(--soft);letter-spacing:.04em}
+.del{font-size:12px;color:var(--soft);text-decoration:underline;text-underline-offset:3px}
+.del:hover{color:var(--cream)}
+
+/* photos */
+.upbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px}
+.upbar input{flex:1;min-width:200px}
+.grid{columns:3 240px;column-gap:14px}
+.ph-card{break-inside:avoid;margin:0 0 14px;border-radius:16px;overflow:hidden;background:rgba(245,239,226,.05);border:1px solid var(--line);cursor:zoom-in;transition:transform .3s}
+.ph-card:hover{transform:translateY(-2px)}
+.ph-card img{display:block;width:100%;height:auto;background:rgba(245,239,226,.04)}
+.ph-card figcaption{padding:10px 12px 12px;font-size:14px;line-height:1.45}
+.ph-card figcaption .meta{display:block;margin-top:4px}
+
+/* letters */
+.letters{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px}
+.env{position:relative;text-align:left;border-radius:16px;padding:22px 20px 18px;min-height:170px;background:linear-gradient(160deg,rgba(245,239,226,.12),rgba(245,239,226,.04));border:1px solid var(--line);display:flex;flex-direction:column;gap:8px;transition:transform .3s,border-color .3s;overflow:hidden}
+.env:hover{transform:translateY(-3px);border-color:rgba(245,239,226,.35)}
+.env::before{content:"";position:absolute;left:0;right:0;top:0;height:64px;background:linear-gradient(to bottom right,transparent 49.5%,rgba(245,239,226,.08) 50%) left/50% 100% no-repeat,linear-gradient(to bottom left,transparent 49.5%,rgba(245,239,226,.08) 50%) right/50% 100% no-repeat;pointer-events:none}
+.seal{width:38px;height:38px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#e89aa9,#9c3c55);display:grid;place-items:center;font:500 15px var(--head);color:#fff5f0;box-shadow:0 4px 14px rgba(156,60,85,.45);margin-bottom:6px;position:relative}
+.env h3{font:400 22px/1.15 var(--head)}
+.env .hint{font-size:13px;color:var(--soft);font-style:italic}
+.env .meta{margin-top:auto}
+.env.locked{opacity:.75}
+.paper{margin-top:44px;background:var(--cream);color:#24211a;border-radius:6px;padding:clamp(24px,5vw,54px);font:400 18px/1.75 Lora,Georgia,serif;white-space:pre-wrap;box-shadow:0 30px 80px rgba(0,0,0,.5);background-image:repeating-linear-gradient(transparent 0 31px,rgba(36,33,26,.06) 31px 32px)}
+.paper h3{font:italic 400 26px/1.3 Lora,Georgia,serif;margin-bottom:18px;white-space:normal}
+.paper .sig{margin-top:26px;font-style:italic;text-align:right;white-space:normal}
+
+/* songs */
+.songs{display:flex;flex-direction:column}
+.song{display:grid;grid-template-columns:44px 1fr auto;gap:16px;align-items:start;padding:18px 0;border-bottom:1px solid var(--line)}
+.song .n{font:300 26px/1 var(--head);color:var(--soft);padding-top:2px}
+.song h3{font:400 24px/1.1 var(--head)}
+.song .ar{font-size:14px;color:var(--soft);margin-top:4px}
+.song .why{font:italic 15.5px/1.55 Lora,Georgia,serif;margin-top:10px;color:rgba(245,239,226,.86)}
+.song .acts{display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+.listen{display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 14px;border-radius:99px;border:1px solid var(--line);font-size:13px;white-space:nowrap}
+.listen:hover{background:rgba(245,239,226,.1)}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:26px;padding:18px;border:1px solid var(--line);border-radius:18px;background:rgba(245,239,226,.03)}
+.form-grid .full{grid-column:1/-1}
+
+/* wishes */
+.wish{display:flex;align-items:flex-start;gap:14px;padding:15px 0;border-bottom:1px solid var(--line)}
+.chk{width:26px;height:26px;flex:none;border-radius:50%;border:1.5px solid var(--cream);display:grid;place-items:center;margin-top:1px;transition:background .2s}
+.chk svg{width:14px;height:14px;stroke:#151510;stroke-width:2.2;fill:none;opacity:0}
+.wish.done .chk{background:var(--cream)}.wish.done .chk svg{opacity:1}
+.wish .t{flex:1;font-size:17px;line-height:1.45}
+.wish.done .t{color:var(--soft);text-decoration:line-through;text-decoration-color:rgba(245,239,226,.4)}
+.prog{height:3px;border-radius:3px;background:var(--line);margin:4px 0 18px;overflow:hidden}.prog i{display:block;height:100%;background:var(--cream);transition:width .6s}
+
+/* settings */
+.set-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:720px}
+.set-grid h4{grid-column:1/-1;font:400 22px var(--head);margin-top:10px}
+
+/* modal */
+.modal{position:fixed;inset:0;z-index:6;display:grid;place-items:center;padding:20px;background:rgba(0,0,0,.55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);opacity:0;visibility:hidden;transition:opacity .35s,visibility 0s .35s}
+.modal.open{opacity:1;visibility:visible;transition:opacity .35s}
+.mbox{width:min(720px,100%);max-height:calc(100vh - 40px);overflow:auto;background:rgba(12,14,18,.92);border:1px solid var(--line);border-radius:22px;padding:26px;position:relative;touch-action:pan-y}
+.mbox.wide{width:min(1100px,100%);background:transparent;border:0;padding:0}
+.mbox h3.mt{font:400 30px var(--head);margin-bottom:16px;padding-right:50px}
+.mbox .close{position:absolute;right:16px;top:16px}
+.mbox .stack{display:flex;flex-direction:column;gap:12px}
+.lb img{display:block;max-width:100%;max-height:calc(100vh - 140px);margin:0 auto;border-radius:12px}
+.lb .cap2{text-align:center;margin-top:14px;font-size:15px}
+.lb .close{right:0;top:-52px;background:rgba(0,0,0,.4)}
+.err{color:#ffb4b4;font-size:13.5px;min-height:1.2em}
+
+.toast{position:fixed;left:50%;bottom:calc(110*var(--u) + 30px);transform:translate(-50%,20px);opacity:0;z-index:8;background:var(--cream);color:#151510;padding:12px 20px;border-radius:99px;font-size:14px;font-weight:500;transition:opacity .3s,transform .3s;pointer-events:none;max-width:calc(100vw - 40px);text-align:center}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.heart{position:fixed;z-index:7;pointer-events:none;font-size:22px;animation:rise 2.4s cubic-bezier(.2,.7,.3,1) forwards}
+@keyframes rise{0%{opacity:0;transform:translate(0,0) scale(.4)}15%{opacity:1}100%{opacity:0;transform:translate(var(--dx),-260px) scale(1.2) rotate(var(--r))}}
+
+/* status, presence, ripple */
+.status{display:flex;gap:8px;margin-top:calc(12*var(--u));flex-wrap:wrap;justify-content:center}
+.chip{display:inline-flex;align-items:center;gap:7px;height:32px;padding:0 13px;border-radius:99px;background:rgba(0,0,0,.42);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font-size:13px;color:var(--soft);white-space:nowrap;max-width:88vw;overflow:hidden;text-overflow:ellipsis}
+.chip b{color:var(--cream);font-weight:500}
+button.chip{border:1px dashed rgba(245,239,226,.28)}button.chip:hover{color:var(--cream)}
+.here{position:absolute;left:calc(44*var(--u));top:calc(24*var(--u) + 58px);transform:translateY(-8px);opacity:0;transition:opacity .6s,transform .6s;z-index:3;display:flex;align-items:center;gap:9px;height:34px;padding:0 16px;border-radius:99px;background:rgba(0,0,0,.5);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);font-size:13.5px;border:1px solid rgba(247,182,200,.35);pointer-events:none;white-space:nowrap}
+.here.on{opacity:1;transform:none}
+.ui.pnl .here{opacity:0}
+.here i{width:8px;height:8px;border-radius:50%;background:#f7b6c8;box-shadow:0 0 0 0 rgba(247,182,200,.7);animation:beat 1.6s infinite}
+@keyframes beat{0%{box-shadow:0 0 0 0 rgba(247,182,200,.7)}70%{box-shadow:0 0 0 10px rgba(247,182,200,0)}100%{box-shadow:0 0 0 0 rgba(247,182,200,0)}}
+.ripple{position:fixed;z-index:1;pointer-events:none;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;border:2px solid rgba(247,182,200,.9);animation:rip 1.4s ease-out forwards}
+.ripple.me{border-color:rgba(245,239,226,.8)}
+@keyframes rip{to{transform:scale(9);opacity:0;border-width:.5px}}
+.emojis{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.emojis button{height:48px;border-radius:14px;border:1px solid var(--line);background:rgba(245,239,226,.04);font-size:15px;display:flex;align-items:center;gap:10px;padding:0 14px;text-align:left}
+.emojis button:hover,.emojis button.sel{background:rgba(245,239,226,.14);border-color:rgba(245,239,226,.4)}
+
+/* daily question */
+.qcard{padding:26px;border-radius:20px;border:1px solid var(--line);background:linear-gradient(160deg,rgba(247,182,200,.1),rgba(245,239,226,.03));margin-bottom:26px}
+.qcard .qd{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--soft)}
+.qcard h3{font:400 clamp(26px,3vw,36px)/1.15 var(--head);margin:10px 0 18px}
+.qcard textarea{min-height:90px}
+.ans{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.ans>div{padding:16px;border-radius:14px;background:rgba(0,0,0,.25);border:1px solid var(--line);font:italic 16px/1.55 Lora,Georgia,serif;white-space:pre-wrap;min-height:70px}
+.ans .who{display:block;font:500 11px Manrope,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);margin-bottom:8px;font-style:normal}
+.ans .lock{color:var(--soft);font-style:normal;font-family:Manrope,sans-serif;font-size:14px}
+.past{padding:18px 0;border-bottom:1px solid var(--line)}
+.past h4{font:400 20px/1.25 var(--head);margin:4px 0 10px}
+
+/* video letters */
+.vids{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+.vid{border-radius:16px;overflow:hidden;border:1px solid var(--line);background:rgba(245,239,226,.04)}
+.vid video{display:block;width:100%;aspect-ratio:9/12;object-fit:cover;background:#000}
+.vid div{padding:12px 14px;display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.vid h4{font:400 19px/1.2 var(--head)}
+.sec{font:400 26px var(--head);margin:34px 0 14px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+/* story */
+.tl{position:relative;padding-left:30px}
+.tl::before{content:"";position:absolute;left:8px;top:6px;bottom:6px;width:1px;background:linear-gradient(var(--line),rgba(247,182,200,.5),var(--line))}
+.st{position:relative;padding:4px 0 30px}
+.st::before{content:"";position:absolute;left:-27px;top:9px;width:11px;height:11px;border-radius:50%;background:#f7b6c8;box-shadow:0 0 14px rgba(247,182,200,.8)}
+.st .dt{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--soft)}
+.st h3{font:400 26px/1.15 var(--head);margin:6px 0 8px}
+.st p{font:16px/1.65 Lora,Georgia,serif;color:rgba(245,239,226,.88);white-space:pre-wrap}
+.st img{display:block;max-width:min(420px,100%);border-radius:14px;margin-top:12px;cursor:zoom-in}
+
+/* add to home screen */
+.howto{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.howto div{padding:16px;border-radius:14px;border:1px solid var(--line);font-size:14px;line-height:1.6;color:var(--soft)}
+.howto b{color:var(--cream);display:block;margin-bottom:6px;font-weight:600}
+
+/* moon + celebrations */
+.moon{position:absolute;right:13%;top:16%;width:calc(54*var(--u));height:calc(54*var(--u));min-width:30px;min-height:30px;pointer-events:auto;cursor:pointer;filter:drop-shadow(0 0 16px rgba(245,239,226,.5));z-index:1}
+.moon svg{width:100%;height:100%;display:block}
+.moonlbl{position:absolute;right:13%;top:calc(16% + 62*var(--u));font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);white-space:nowrap;transform:translateX(25%);text-shadow:0 1px 8px #000}
+.cele{margin-bottom:calc(22*var(--u));border:1px solid rgba(247,182,200,.45)!important;color:var(--cream)!important}
+.count{position:fixed;inset:0;z-index:7;display:grid;place-items:center;background:rgba(0,0,0,.5);pointer-events:none;opacity:0;transition:opacity .3s}
+.count.on{opacity:1}
+.count span{font:400 min(42vw,300px)/1 var(--head);color:var(--cream);text-shadow:0 0 60px rgba(247,182,200,.6);animation:pop 1s ease-out}
+.count span.go2{font-size:min(16vw,120px)}
+@keyframes pop{0%{transform:scale(1.6);opacity:0}30%{opacity:1}100%{transform:scale(1);opacity:.9}}
+
+/* together */
+.tgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:8px}
+.tcard{padding:20px;border-radius:18px;border:1px solid var(--line);background:rgba(245,239,226,.04)}
+.tcard h3{font:400 24px var(--head);margin-bottom:6px}
+.tcard p{font-size:14px;color:var(--soft);line-height:1.5;margin-bottom:14px}
+.board{position:relative;width:100%;aspect-ratio:4/3;max-height:62vh;border-radius:16px;overflow:hidden;background:#f5efe2}
+.board canvas{position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:crosshair}
+.pal{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:12px 0}
+.pal button.sw{width:30px;height:30px;border-radius:50%;border:2px solid transparent}
+.pal button.sw.sel{border-color:var(--cream);box-shadow:0 0 0 2px #000 inset}
+.qz{padding:18px;border:1px solid var(--line);border-radius:16px;margin-bottom:12px;background:rgba(245,239,226,.03)}
+.qz h4{font:400 21px/1.25 var(--head);margin-bottom:12px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.opt{min-height:44px;padding:10px 14px;border-radius:12px;border:1px solid var(--line);text-align:left;font-size:15px;background:rgba(245,239,226,.04)}
+.opt:not(:disabled):hover{background:rgba(245,239,226,.12)}
+.opt.right{background:rgba(159,216,176,.22);border-color:rgba(159,216,176,.7)}
+.opt.wrong{background:rgba(255,107,127,.18);border-color:rgba(255,107,127,.6)}
+.opt:disabled{cursor:default}
+.score{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+.qopt{display:flex;align-items:center;gap:10px}.qopt input[type=radio]{accent-color:#f7b6c8;width:20px;height:20px;flex:none}
+
+/* boxes */
+.boxes{display:grid;grid-template-columns:repeat(auto-fill,minmax(118px,1fr));gap:12px}
+.box{position:relative;aspect-ratio:1;border-radius:18px;border:1px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;background:rgba(245,239,226,.04);text-align:center;padding:8px;transition:transform .2s}
+.box:hover{transform:translateY(-2px)}
+.box .bd{font:400 22px var(--head)}.box .bl{font-size:11.5px;color:var(--soft)}
+.box .bi{font-size:24px;line-height:1}
+.box.ready{background:radial-gradient(circle at 50% 40%,rgba(247,182,200,.35),rgba(247,182,200,.06));border-color:rgba(247,182,200,.6);box-shadow:0 0 24px rgba(247,182,200,.25)}
+.box.meet{border-color:var(--cream)}
+.box .mine{position:absolute;top:8px;right:9px;font-size:11px;color:var(--soft)}
+
+/* moods */
+.moods{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 18px}
+.mood{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 14px 0 8px;border-radius:99px;border:1px solid var(--line);font-size:14px}
+.mood i{width:24px;height:24px;border-radius:50%}
+.mood.sel{border-color:var(--cream);background:rgba(245,239,226,.1)}
+.calhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.calhead button{width:36px;height:36px;border-radius:50%;border:1px solid var(--line)}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;max-width:560px;margin:0 auto}
+.calhead,.legend{max-width:560px;margin-left:auto;margin-right:auto}
+.cal .wd{font-size:11px;color:var(--soft);text-align:center;padding-bottom:4px}
+.cd{aspect-ratio:1;border-radius:12px;background:rgba(245,239,226,.04);position:relative;font-size:10.5px;color:var(--soft);padding:4px 6px;overflow:hidden}
+.cd.today{outline:1px solid rgba(245,239,226,.6)}
+.cd .dots{position:absolute;left:50%;top:56%;transform:translate(-50%,-50%);display:flex}
+.cd .dots i{width:clamp(12px,2.6vw,22px);height:clamp(12px,2.6vw,22px);border-radius:50%;margin:0 -3px;box-shadow:0 0 10px currentColor}
+.legend{display:flex;gap:16px;font-size:12px;color:var(--soft);margin-top:10px}
+
+/* photo booth */
+.booth{display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:22px;align-items:start}
+.booth canvas{display:block;width:100%;height:auto;max-height:64vh;object-fit:contain;border-radius:8px;box-shadow:0 20px 60px rgba(0,0,0,.5);background:#111}
+.bctl{display:flex;flex-direction:column;gap:14px}
+.seg{display:flex;gap:6px;flex-wrap:wrap}
+.seg button{height:36px;padding:0 14px;border-radius:99px;border:1px solid var(--line);font-size:13.5px}
+.seg button.sel{background:var(--cream);color:#151510;border-color:var(--cream)}
+.slots{display:flex;flex-direction:column;gap:8px}
+
+/* phone tab bar + more sheet */
+.tabbar{display:none}
+.sheet{position:fixed;left:10px;right:10px;bottom:calc(76px + env(safe-area-inset-bottom));z-index:5;background:rgba(12,14,18,.94);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--line);border-radius:20px;padding:8px;opacity:0;visibility:hidden;transform:translateY(10px);transition:opacity .25s,transform .25s,visibility 0s .25s}
+.sheet.open{opacity:1;visibility:visible;transform:none;transition:opacity .25s,transform .25s}
+.sheet a{display:flex;align-items:center;gap:12px;height:52px;padding:0 16px;border-radius:14px;font-size:16px}
+.sheet a:active,.sheet a.cur{background:rgba(245,239,226,.1)}
+
+@media (max-width:820px){
+  :root{--u:1px}
+  .ui nav,.corner span,.corner i{display:none}
+  .corner{left:auto;right:16px;top:14px;bottom:auto;justify-content:flex-end}
+  .sound{width:40px;height:40px;padding:8px;border-radius:50%;background:rgba(0,0,0,.35)}
+  .tabbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:5;justify-content:space-around;align-items:stretch;padding:6px 6px calc(6px + env(safe-area-inset-bottom));background:rgba(8,10,12,.82);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-top:1px solid var(--line);pointer-events:auto}
+  .tabbar a,.tabbar button{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;height:54px;border-radius:14px;font-size:10.5px;letter-spacing:.04em;color:var(--soft)}
+  .tabbar svg{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+  .tabbar .cur{color:var(--cream)}.tabbar .cur svg{stroke:#f7b6c8}
+  .here{top:62px;left:16px}
+  .hero{transform:translateY(-54%)}
+  .panel{bottom:calc(74px + env(safe-area-inset-bottom))!important;top:64px!important}
+  .ans,.howto,.tgrid,.booth,.opts{grid-template-columns:1fr}
+  .moon{right:18px;top:118px}.moonlbl{display:none}
+  .boxes{grid-template-columns:repeat(3,1fr);gap:8px}
+  .booth canvas{max-height:52vh}
+  .vids{grid-template-columns:1fr 1fr;gap:10px}
+  .toast{bottom:calc(88px + env(safe-area-inset-bottom))!important}
+  header{padding:18px 70px 0 18px}
+  .ui nav{order:3;width:100%;gap:8px;overflow-x:auto;font-size:11px;letter-spacing:.12em;padding-bottom:4px;scrollbar-width:none}
+  .ui nav::-webkit-scrollbar{display:none}
+  .ui nav a:not(.pill){flex:none;padding:8px 12px;border:1px solid var(--line);border-radius:99px}
+  .ui nav a.cur:not(.pill){background:rgba(245,239,226,.14)}.ui nav a.cur:not(.pill)::after{display:none}
+  .pill{height:36px;padding:0 16px;font-size:12px}
+  .hero{left:20px;right:20px}
+  h1{font-size:clamp(60px,18vw,92px);white-space:normal}
+  .cap{font-size:16px}
+  .clocks{font-size:11px;gap:14px}
+  .panel{top:118px;bottom:70px;width:calc(100vw - 20px);border-radius:20px}
+  .ph{padding:18px 18px 14px}.pb{padding:16px 18px 28px}
+  .grid{columns:2 140px;column-gap:10px}.ph-card{margin-bottom:10px}
+  .form-grid,.set-grid{grid-template-columns:1fr}
+  .song{grid-template-columns:30px 1fr;gap:10px}.song .acts{grid-column:2;flex-direction:row;align-items:center}
+  .toast{bottom:90px}
+}
+@media (prefers-reduced-motion:reduce){.loader span{animation:none}.heart{display:none}}
+</style>
+<script type="importmap">
+{"imports":{"three":"./vendor/three/build/three.module.js","three/addons/":"./vendor/three/examples/jsm/"}}
+</script>
+</head>
+<body>
+<div id="valley" aria-hidden="true"><div class="js-canvas-container"></div></div>
+
+<div class="ui" id="ui">
+  <header>
+    <a class="logo" href="#" data-go="">Бид хоёрын булан</a>
+    <nav aria-label="Үндсэн">
+      <a href="#" data-go="">Нүүр</a>
+      <a href="#zurag" data-go="zurag">Зураг</a>
+      <a href="#zahidal" data-go="zahidal">Захидал</a>
+      <a href="#hairtsag" data-go="hairtsag">Хайрцаг</a>
+      <a href="#tuuh" data-go="tuuh">Түүх</a>
+      <a href="#asuult" data-go="asuult">Асуулт</a>
+      <a href="#hamt" data-go="hamt">Хамтдаа</a>
+      <a href="#duu" data-go="duu">Дуу</a>
+      <a href="#husel" data-go="husel">Хүсэл</a>
+      <a class="pill" href="#tohirgoo" data-go="tohirgoo">Тохиргоо</a>
+    </nav>
+  </header>
+
+  <div class="here" id="here"><i></i><span id="hereTxt">Хайрт чинь яг одоо энд байна</span></div>
+
+  <div class="moon" id="moon" role="button" tabindex="0" aria-label="Өнөөдрийн сар"></div><div class="moonlbl" id="moonLbl">Бид нэг сарыг харж байна</div>
+
+  <section class="hero" id="hero">
+    <span class="chip cele" id="cele" hidden></span>
+    <h1>Хол ч, ойрхон.</h1>
+    <p class="cap" id="cap">Бид хоёрын жижигхэн булан.<br>Зураг, захидал, дуу — бүгд энд.</p>
+    <div class="clocks" id="clocks" hidden></div>
+    <div class="status"><span class="chip" id="pStatus" hidden></span><button class="chip" id="myStatus" data-write>Миний төлөв: <b>тавих</b></button></div>
+    <button class="go" id="go" aria-label="Чамайг санаж байна"><svg viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-7.5-10.1A4.2 4.2 0 0 1 12 7.4a4.2 4.2 0 0 1 7.5 2.5C19.5 15.4 12 20 12 20Z"/></svg></button>
+    <p class="miss" id="miss">Санасан үедээ зүрхэн дээр дараарай</p>
+  </section>
+
+  <!-- Photos -->
+  <section class="panel" id="p-zurag" aria-label="Зургууд">
+    <div class="ph"><div><h2>Бидний зургууд</h2><p>Хамт байсан, хол байсан бүх агшин. Зургаа оруулахад хоёулаа шууд хардаг.</p></div><button class="close" data-go="" aria-label="Хаах"><svg viewBox="0 0 16 16"><path d="M3 3l10 10M13 3 3 13"/></svg></button></div>
+    <div class="pb">
+      <div class="note" data-status hidden></div>
+      <div class="upbar" data-write>
+        <input type="text" id="phCap" maxlength="200" placeholder="Тайлбар (заавал биш) — жишээ нь: Анхны уулзалт">
+        <label class="btn" for="phFile">Зураг нэмэх</label>
+        <a class="btn ghost" href="#buhheg" data-go="buhheg">📸 Фото бүхээг</a>
+        <input type="file" id="phFile" accept="image/*" multiple hidden>
+      </div>
+      <div class="grid" id="photos"></div>
+      <div class="empty" id="photosEmpty" hidden>Одоохондоо зураг алга.<br>Анхны дурсамжаа оруулаарай.</div>
+    </div>
+  </section>
+
+  <!-- Letters -->
+  <section class="panel" id="p-zahidal" aria-label="Нууц захидал">
+    <div class="ph"><div><h2>Нууц захидал</h2><p>Захидал бүр нууц үгээр шифрлэгдэнэ. Нууц үгийг мэдэхгүй хүн, тэр дундаа Claude ч уншиж чадахгүй.</p></div><button class="close" data-go="" aria-label="Хаах"><svg viewBox="0 0 16 16"><path d="M3 3l10 10M13 3 3 13"/></svg></button></div>
+    <div class="pb">
+      <div class="note" data-status hidden></div>
+      <div class="row" style="margin-bottom:22px" data-write><button class="btn" id="newLetter">Захидал бичих</button></div>
+      <div class="letters" id="letters"></div>
+      <div class="empty" id="lettersEmpty" hidden>Хайрын захидал хүлээж байна.</div>
+      <div class="sec"><span>Видео захидал</span></div>
+      <div class="upbar" data-write>
+        <input type="text" id="vidTitle" maxlength="80" placeholder="Гарчиг — жишээ нь: Өглөөний мэнд">
+        <label class="btn" for="vidFile">Бичлэг илгээх</label>
+        <input type="file" id="vidFile" accept="video/*" hidden>
+      </div>
+      <p class="meta" style="margin:-12px 0 16px" data-write>Утасны камераар шууд бичиж болно. Нэг бичлэг 20 MB хүртэл (ойролцоогоор 20–40 секунд).</p>
+      <div class="vids" id="vids"></div>
+      <div class="empty" id="vidsEmpty" hidden>Анхны видео захидлаа илгээгээрэй.</div>
+    </div>
+  </section>
+
+  <!-- Story -->
+  <section class="panel" id="p-tuuh" aria-label="Бидний түүх">
+    <div class="ph"><div><h2>Бидний түүх</h2><p>Танилцсанаас эхлээд өнөөдрийг хүртэлх гол мөчүүд.</p></div><button class="close" data-go="" aria-label="Хаах"><svg viewBox="0 0 16 16"><path d="M3 3l10 10M13 3 3 13"/></svg></button></div>
+    <div class="pb">
+      <div class="note" data-status hidden></div>
+      <form class="form-grid" id="storyForm" data-write>
+        <label class="field">Огноо<input type="date" name="date" required></label>
+        <label class="field">Юу болсон бэ?<input type="text" name="title" maxlength="100" required placeholder="Жишээ нь: Анх танилцсан өдөр"></label>
+        <label class="field full">Дурсамж (заавал биш)<input type="text" name="text" maxlength="600" placeholder="Тэр өдөр…"></label>
+        <div class="full row"><label class="btn ghost" for="storyFile" id="storyFileLbl">+ Зураг</label><input type="file" id="storyFile" accept="image/*" hidden><button class="btn" type="submit" id="storyBtn">Түүхэнд нэмэх</button></div>
+      </form>
+      <div class="tl" id="story"></div>
+      <div class="empty" id="storyEmpty" hidden>Бидний түүх хаанаас эхэлсэн бэ?</div>
+    </div>
+  </section>
+
+  <!-- Daily question -->
+  <section class="panel" id="p-asuult" aria-label="Өдрийн асуулт">
+    <div class="ph"><div><h2>Өдөр бүр</h2><p>Өнөөдрийн сэтгэл, өнөөдрийн асуулт. Чи хариулсны дараа л хайртынхаа хариултыг харна.</p></div><button class="close" data-go="" aria-label="Хаах"><svg viewBox="0 0 16 16"><path d="M3 3l10 10M13 3 3 13"/></svg></button></div>
+    <div class="pb">
+      <div class="note" data-status hidden></div>
+      <div class="qcard" style="background:rgba(245,239,226,.03)">
+        <div class="qd">Өнөөдрийн сэтгэл</div>
+        <div class="moods" id="moods"></div>
+        <div class="calhead"><button type="button" id="calPrev" aria-label="Өмнөх сар">‹</button><b id="calTitle" style="font-weight:500"></b><button type="button" id="calNext" aria-label="Дараагийн сар">›</button></div>
+        <div class="cal" id="cal"></div>
+        <div class="legend" id="calLegend"></div>
+      </div>
+      <div class="qcard">
+        <div class="qd" id="qDate"></div>
+        <h3 id="qText"></h3>
+        <form class="stack" id="qForm" data-write style="display:flex;flex-direction:column;gap:10px">
+          <textarea name="t" maxlength="1500" required placeholder="Чиний хариулт…"></textarea>
+          <div class="row"><button class="btn" type="submit" id="qBtn">Хариулах</button><span class="meta" id="qMsg"></span></div>
+        </form>
+        <div class="ans" id="qAns"></div>
+      </div>
+      <div class="sec"><span>Өмнөх асуултууд</span></div>
+      <div id="qPast"></div>
+      <div class="empty" id="qPastEmpty" hidden>Өнгөрсөн хариултууд энд цугларна.</div>
+    </div>
+  </section>
+
+  <!-- Songs -->
+  <section class="panel" id="p-duu" aria-label="Дуунууд">
+    <div class="ph"><div><h2>Бидний дуунууд</h2><p>Нэгнээ санагдуулдаг дуунууд, бас яагаад гэдгийг нь.</p></div><button class="close" data-go="" aria-label="Хаах"><svg viewBox="0 0 16 16"><path d="M3 3l10 10M13 3 3 13"/></svg></button></div>
+    <div class="pb">
+      <div class="note" data-status hidden></div>
+      <form class="form-grid" id="songForm" data-write>
+        <label class="field">Дууны нэр<input type="text" name="title" maxlength="120" required placeholder="Дууны нэр"></label>
+        <label class="field">Дуучин<input type="text" name="artist" maxlength="120" placeholder="Хэн дуулдаг"></label>
+        <label class="field full">Холбоос (заавал биш)<input type="url" name="link" maxlength="500" placeholder="https://… YouTube, Spotify, QQ Music"></label>
+        <label class="field full">Яагаад энэ дуу?<input type="text" name="why" maxlength="400" placeholder="Энэ дууг сонсох бүрт би…"></label>
+        <div class="full row"><button class="btn" type="submit">Дуу нэмэх</button></div>
+      </form>
+      <div class="songs" id="songs"></div>
+      <div class="empty" id="songsEmpty" hidden>Бидний анхны дуу юу байсан бэ?</div>
+    </div>
+  </section>
+
+  <!-- Wishes -->
+  <section class="panel" id="p-husel" aria-label="Хамтдаа хийх зүйлс">
+    <div class="ph"><div><h2>Хамтдаа хийх зүйлс</h2><p>Уулзахаараа хийх, хамт очих, хамт мэдрэх бүхэн.</p></div><button class="close" data-go="" aria-label="Хаах"><svg viewBox="0 0 16 16"><path d="M3 3l10 10M13 3 3 13"/></svg></button></div>
+    <div class="pb">
+      <div class="note" data-status hidden></div>
+      <form class="row" id="wishForm" style="margin-bottom:12px" data-write><input type="text" name="t" maxlength="200" required placeholder="Жишээ нь: Хамтдаа нар мандахыг харах" style="flex:1;min-width:200px"><button class="btn" type="submit">Нэмэх</button></form>
+      <div class="meta" id="wishCount"></div><div class="prog"><i id="wishBar" style="width:0"></i></div>
+      <div id="wishes"></div>
+      <div class="empty" id="wishesEmpty" hidden>Бидний хамгийн анхны хүсэл юу вэ?</div>
+    </div>
+  </section>
+
+
+  <!-- Boxes until we meet -->
+  <section class="panel" id="p-hairtsag" aria-label="Уулзах хүртэлх хайрцагнууд">
+    <div class="ph"><div><h2>Уулзах хүртэлх хайрцагнууд</h2><p>Өдөр бүрд нэг хайрцаг. Хайртдаа урьдчилан жижиг захидал, зураг хийж үлдээ. Хайрцаг бүр зөвхөн өөрийн өдөр нээгдэнэ.</p></div><button class="close" data-go="" aria-label="Хаах"><svg viewBox="0 0 16 16"><path d="M3 3l10 10M13 3 3 13"/></svg></button></div>
+    <div class="pb">
+      <div class="note" data-status hidden></div>
+      <div class="note" id="boxNote" hidden></div>
+      <div class="boxes" id="boxes"></div>
+    </div>
+  </section>
+
+  <!-- Together -->
+  <section class="panel" id="p-hamt" aria-label="Хамтдаа">
+    <div class="ph"><div><h2>Хамтдаа</h2><p>Хол ч гэсэн нэг дор: зэрэг эхлүүлэх, хамт зурах, нэгнээ хэр мэдэхээ шалгах.</p></div><button class="close" data-go="" aria-label="Хаах"><svg viewBox="0 0 16 16"><path d="M3 3l10 10M13 3 3 13"/></svg></button></div>
+    <div class="pb">
+      <div class="note" data-status hidden></div>
+      <div class="tgrid">
+        <div class="tcard"><h3>🎬 Хамт эхлүүлэх</h3><p>Нэг кино, нэг дуугаа бэлдээд товчоо дар. Хоёулангийн дэлгэцэн дээр 3-2-1 зэрэг тоолно.</p><button class="btn" id="countBtn">3 · 2 · 1 эхлүүлэх</button></div>
+        <div class="tcard"><h3>📸 Фото бүхээг</h3><p>Хоёулаа тус тусдаа сельфи ав. Нэг зурагт хажуу хажуудаа зогсож байгаа мэт нийлнэ.</p><a class="btn" href="#buhheg" data-go="buhheg">Бүхээг рүү</a></div>
+      </div>
+      <div class="sec"><span>🎨 Хамтдаа зурах</span><span class="meta" id="drawWho"></span></div>
+      <div class="board"><canvas id="board" width="1200" height="900"></canvas></div>
+      <div class="pal" id="pal"></div>
+      <div class="sec"><span>💭 Чи намайг хэр мэдэх вэ?</span></div>
+      <div class="score" id="qzScore"></div>
+      <div id="qzTheirs"></div>
+      <div class="empty" id="qzEmpty" hidden>Хайрт чинь хараахан асуулт бичээгүй байна.</div>
+      <form class="form-grid" id="qzForm" data-write style="margin-top:18px">
+        <label class="field full">Өөрийнхөө тухай асуулт<input type="text" name="q" maxlength="140" required placeholder="Жишээ нь: Миний хамгийн дуртай хоол юу вэ?"></label>
+        <label class="qopt"><input type="radio" name="a" value="0" checked><input type="text" name="o0" maxlength="60" required placeholder="Хариулт 1"></label>
+        <label class="qopt"><input type="radio" name="a" value="1"><input type="text" name="o1" maxlength="60" required placeholder="Хариулт 2"></label>
+        <label class="qopt"><input type="radio" name="a" value="2"><input type="text" name="o2" maxlength="60" placeholder="Хариулт 3"></label>
+        <label class="qopt"><input type="radio" name="a" value="3"><input type="text" name="o3" maxlength="60" placeholder="Хариулт 4"></label>
+        <p class="meta full">Зөв хариултынхаа хажуугийн дугуйг сонго.</p>
+        <div class="full row"><button class="btn" type="submit">Асуулт нэмэх</button></div>
+      </form>
+      <div class="sec" style="font-size:20px"><span>Миний асуултууд</span></div>
+      <div id="qzMine"></div>
+    </div>
+  </section>
+
+  <!-- Photo booth -->
+  <section class="panel" id="p-buhheg" aria-label="Фото бүхээг">
+    <div class="ph"><div><h2>Фото бүхээг</h2><p>«Хоёулаа» горимд чи өөрийн талыг, хайрт чинь өөрийнхийг авна. Хоёр тал нь нэг зурагт нийлнэ.</p></div><button class="close" data-go="" aria-label="Хаах"><svg viewBox="0 0 16 16"><path d="M3 3l10 10M13 3 3 13"/></svg></button></div>
+    <div class="pb">
+      <div class="note" data-status hidden></div>
+      <div class="booth">
+        <canvas id="boothCv" width="1240" height="900"></canvas>
+        <div class="bctl">
+          <div class="field">Хэлбэр<div class="seg" id="bMode"><button type="button" data-v="two" class="sel">Хоёулаа</button><button type="button" data-v="four">4 кадр</button></div></div>
+          <div class="slots" id="bSlots"></div>
+          <div class="field">Өнгө аяс<div class="seg" id="bFilter"><button type="button" data-v="none" class="sel">Энгийн</button><button type="button" data-v="bw">Хар цагаан</button><button type="button" data-v="warm">Дулаан</button><button type="button" data-v="film">Хальс</button></div></div>
+          <div class="field">Хүрээ<div class="seg" id="bFrame"><button type="button" data-v="cream" class="sel">Цөцгий</button><button type="button" data-v="pink">Ягаан</button><button type="button" data-v="black">Хар</button></div></div>
+          <label class="field">Доор бичих үг<input type="text" id="bCap" maxlength="40" placeholder="Жишээ нь: Хол ч, ойрхон"></label>
+          <button class="btn" id="bSave" data-write>Зургийн цомогт хадгалах</button>
+        </div>
+      </div>
+      <input type="file" id="boothFile" accept="image/*" capture="user" hidden>
+    </div>
+  </section>
+
+  <!-- Settings -->
+  <section class="panel" id="p-tohirgoo" aria-label="Тохиргоо">
+    <div class="ph"><div><h2>Тохиргоо</h2><p>Нүүрэн дээрх тоолуур, цагууд эндээс тохирно.</p></div><button class="close" data-go="" aria-label="Хаах"><svg viewBox="0 0 16 16"><path d="M3 3l10 10M13 3 3 13"/></svg></button></div>
+    <div class="pb">
+      <div class="note" data-status hidden></div>
+      <form class="set-grid" id="setForm" data-write>
+        <h4>Би</h4>
+        <label class="field">Миний нэр (сольж болно — хайрт маань харна)<input type="text" name="name" maxlength="40" placeholder="Жишээ нь: Simple"></label>
+        <label class="field">Миний цагийн бүс<input type="text" name="tz" list="tzlist" maxlength="60" placeholder="Asia/Shanghai"></label>
+        <label class="field">Миний төрсөн өдөр<input type="date" name="bday"></label>
+        <h4>Бид хоёр</h4>
+        <label class="field">Хамт болсон өдөр<input type="date" name="since"></label>
+        <label class="field">Дараагийн уулзалт<input type="date" name="meet"></label>
+        <div class="row" style="grid-column:1/-1"><button class="btn" type="submit">Хадгалах</button><span class="meta" id="setMsg"></span></div>
+      </form>
+      <div class="set-grid" style="margin-top:30px">
+        <h4>Утсандаа апп шиг нэмэх</h4>
+        <div class="howto">
+          <div><b>iPhone</b>Safari-д энэ хуудсыг нээгээд доод талын «Хуваалцах» (□↑) товчийг дарна → «Add to Home Screen» → «Add».</div>
+          <div><b>Android</b>Chrome-д энэ хуудсыг нээгээд баруун дээд «⋮» цэсийг дарна → «Add to Home screen» эсвэл «Install app».</div>
+        </div>
+        <p class="meta" style="grid-column:1/-1;line-height:1.6">Нэг удаа код оруулсан бол дахин асуухгүй. Нүүр дэлгэцийн дүрс дээр дарахад шууд энэ булан нээгдэнэ.</p>
+      </div>
+      <datalist id="tzlist"></datalist>
+    </div>
+  </section>
+
+  <div class="corner"><span>Гүйлгээд аялаарай</span><i></i>
+    <button class="sound" id="sound" aria-pressed="false" aria-label="Орчны дуу"><svg viewBox="0 0 24 24"><path d="M4 9.5v5h3.5L12 18V6L7.5 9.5Z"/><path class="w" d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/><path class="x" d="m16 10 4 4m0-4-4 4"/></svg></button>
+  </div>
+</div>
+
+<!-- Phone tab bar -->
+<nav class="tabbar" aria-label="Цэс">
+  <a href="#" data-go=""><svg viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-7.5-10.1A4.2 4.2 0 0 1 12 7.4a4.2 4.2 0 0 1 7.5 2.5C19.5 15.4 12 20 12 20Z"/></svg>Нүүр</a>
+  <a href="#zurag" data-go="zurag"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="14" rx="3"/><circle cx="9" cy="10" r="1.6"/><path d="m20 16-4.5-4.5L7 19"/></svg>Зураг</a>
+  <a href="#zahidal" data-go="zahidal"><svg viewBox="0 0 24 24"><rect x="3.5" y="6" width="17" height="12.5" rx="2.5"/><path d="m4 7 8 6 8-6"/></svg>Захидал</a>
+  <a href="#hamt" data-go="hamt"><svg viewBox="0 0 24 24"><circle cx="9" cy="9" r="3"/><circle cx="16" cy="10" r="2.5"/><path d="M3.5 19c.6-3 2.8-4.8 5.5-4.8s4.9 1.8 5.5 4.8M14 15.2c2.6-.3 4.8 1 5.6 3.8"/></svg>Хамтдаа</a>
+  <button type="button" id="moreBtn"><svg viewBox="0 0 24 24"><circle cx="6" cy="12" r="1.3"/><circle cx="12" cy="12" r="1.3"/><circle cx="18" cy="12" r="1.3"/></svg>Бусад</button>
+</nav>
+<div class="sheet" id="sheet">
+  <a href="#asuult" data-go="asuult">💬 Өдөр бүр · асуулт, сэтгэл</a>
+  <a href="#hairtsag" data-go="hairtsag">🎁 Уулзах хүртэлх хайрцагнууд</a>
+  <a href="#buhheg" data-go="buhheg">📸 Фото бүхээг</a>
+  <a href="#tuuh" data-go="tuuh">✨ Бидний түүх</a>
+  <a href="#duu" data-go="duu">🎧 Бидний дуунууд</a>
+  <a href="#husel" data-go="husel">🌙 Хамтдаа хийх зүйлс</a>
+  <a href="#tohirgoo" data-go="tohirgoo">⚙️ Тохиргоо</a>
+</div>
+
+<!-- Modals -->
+<div class="modal" id="mName" role="dialog" aria-modal="true" aria-label="Нэрээ солих">
+  <div class="mbox"><button class="close" data-close aria-label="Хаах"><svg viewBox="0 0 16 16"><path d="M3 3l10 10M13 3 3 13"/></svg></button>
+    <h3 class="mt">Нэрээ солих</h3>
+    <form class="row" id="nameForm"><input type="text" name="n" maxlength="40" required placeholder="Миний нэр" style="flex:1;min-width:180px"><button class="btn" type="submit">Хадгалах</button></form>
+    <p class="meta" style="margin-top:12px">Энэ нэрийг хайрт чинь хаа сайгүй харна. Зөвхөн өөрийнхөө нэрийг сольж болно.</p>
+  </div>
+</div>
+<div class="modal" id="mStatus" role="dialog" aria-modal="true" aria-label="Миний төлөв">
+  <div class="mbox"><button class="close" data-close aria-label="Хаах"><svg viewBox="0 0 16 16"><path d="M3 3l10 10M13 3 3 13"/></svg></button>
+    <h3 class="mt">Одоо юу хийж байна?</h3>
+    <div class="emojis" id="emojis"></div>
+    <form class="row" id="statusForm" style="margin-top:14px"><input type="text" name="t" maxlength="60" placeholder="Эсвэл өөрөө бич…" style="flex:1;min-width:180px"><button class="btn" type="submit">Тавих</button></form>
+    <p class="meta" style="margin-top:12px"><button class="del" type="button" id="statusClear">Төлөвөө арилгах</button></p>
+  </div>
+</div>
+<div class="modal" id="mWrite" role="dialog" aria-modal="true" aria-label="Захидал бичих">
+  <div class="mbox"><button class="close" data-close aria-label="Хаах"><svg viewBox="0 0 16 16"><path d="M3 3l10 10M13 3 3 13"/></svg></button>
+    <h3 class="mt">Захидал бичих</h3>
+    <form class="stack" id="writeForm">
+      <label class="field">Дугтуйн гадна бичих үг (нууц биш)<input type="text" name="title" maxlength="80" required placeholder="Жишээ нь: Уйдсан үедээ нээгээрэй"></label>
+      <label class="field">Захидал<textarea name="body" maxlength="20000" required placeholder="Хайрт минь…"></textarea></label>
+      <div class="form-grid" style="margin:0;padding:0;border:0;background:none">
+        <label class="field">Нууц үг<input type="password" name="pw" maxlength="100" required autocomplete="new-password" placeholder="Зөвхөн бид хоёр мэдэх үг"></label>
+        <label class="field">Сануулга (нууц биш)<input type="text" name="hint" maxlength="120" placeholder="Жишээ нь: Анх уулзсан газар"></label>
+        <label class="field full">Нээгдэх өдөр (заавал биш)<input type="date" name="openAt"></label>
+      </div>
+      <p class="meta">Нууц үг жижиг, том үсэг ялгахгүй. Мартвал захидлыг сэргээх боломжгүй.</p>
+      <p class="err" id="writeErr"></p>
+      <div class="row"><button class="btn" type="submit" id="writeBtn">Битүүмжлээд илгээх</button></div>
+    </form>
+  </div>
+</div>
+<div class="modal" id="mRead" role="dialog" aria-modal="true" aria-label="Захидал унших">
+  <div class="mbox"><button class="close" data-close aria-label="Хаах"><svg viewBox="0 0 16 16"><path d="M3 3l10 10M13 3 3 13"/></svg></button>
+    <div id="readLock">
+      <h3 class="mt" id="readTitle"></h3>
+      <p class="meta" id="readHint" style="margin-bottom:14px"></p>
+      <form class="stack" id="readForm">
+        <input type="password" name="pw" required autocomplete="off" placeholder="Нууц үг">
+        <p class="err" id="readErr"></p>
+        <div class="row"><button class="btn" type="submit">Нээх</button><button class="del" type="button" id="readDel" hidden>Энэ захидлыг устгах</button></div>
+      </form>
+    </div>
+    <div id="readOpen" hidden></div>
+  </div>
+</div>
+<div class="modal" id="mPhoto" role="dialog" aria-modal="true" aria-label="Зураг">
+  <div class="mbox wide lb"><button class="close" data-close aria-label="Хаах"><svg viewBox="0 0 16 16"><path d="M3 3l10 10M13 3 3 13"/></svg></button>
+    <img id="lbImg" alt=""><p class="cap2" id="lbCap"></p><p class="meta" style="text-align:center;margin-top:6px"><span id="lbMeta"></span> <button class="del" id="lbDel" hidden>· Устгах</button></p>
+  </div>
+</div>
+
+<div class="modal" id="mBox" role="dialog" aria-modal="true" aria-label="Хайрцаг">
+  <div class="mbox"><button class="close" data-close aria-label="Хаах"><svg viewBox="0 0 16 16"><path d="M3 3l10 10M13 3 3 13"/></svg></button>
+    <h3 class="mt" id="boxTitle"></h3>
+    <div id="boxView"></div>
+    <form class="stack" id="boxForm" style="display:flex;flex-direction:column;gap:12px">
+      <textarea name="t" maxlength="2000" placeholder="Тэр өдөр хайртдаа хэлэх үг…" style="min-height:130px"></textarea>
+      <div class="row"><label class="btn ghost" for="boxFile" id="boxFileLbl">+ Зураг</label><input type="file" id="boxFile" accept="image/*" hidden><button class="btn" type="submit" id="boxBtn">Хайрцагт хийх</button><button class="del" type="button" id="boxDel" hidden>Хайрцгийг хоослох</button></div>
+    </form>
+  </div>
+</div>
+<div class="count" id="count"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="loader" id="loader"><span></span></div>
+
+<script type="module" src="./bridge.js"></script>
+<script type="module">
+import * as THREE from 'three';
+import {EffectComposer} from 'three/addons/postprocessing/EffectComposer.js';
+import {RenderPass} from 'three/addons/postprocessing/RenderPass.js';
+import {UnrealBloomPass} from 'three/addons/postprocessing/UnrealBloomPass.js';
+import {ShaderPass} from 'three/addons/postprocessing/ShaderPass.js';
+
+/* ------------------------------------------------------------------ */
+/*  Ambient audio store: generated night ambience (drone, wind,        */
+/*  crickets, reverb) with a low-pass filter used for the hover muffle */
+/* ------------------------------------------------------------------ */
+const audioStore = (() => {
+  const s = {isInitialized:false, muted:true, ctx:null};
+  function build(){
+    const AC = window.AudioContext || window.webkitAudioContext;
+    const ctx = s.ctx = new AC();
+    const master = s.master = ctx.createGain(); master.gain.value = 0;
+    const filter = s.filter = ctx.createBiquadFilter(); filter.type='lowpass'; filter.frequency.value=16000; filter.Q.value=0.7;
+    filter.connect(master); master.connect(ctx.destination);
+    // reverb
+    const len = ctx.sampleRate*3.5, ir = ctx.createBuffer(2,len,ctx.sampleRate);
+    for(let c=0;c<2;c++){const d=ir.getChannelData(c);for(let i=0;i<len;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/len,3)}
+    const verb = ctx.createConvolver(); verb.buffer=ir;
+    const wet = ctx.createGain(); wet.gain.value=.55; verb.connect(wet); wet.connect(filter);
+    const bus = ctx.createGain(); bus.connect(filter); bus.connect(verb);
+    const lfo = (rate, depth, param) => {const o=ctx.createOscillator(),g=ctx.createGain();o.frequency.value=rate;g.gain.value=depth;o.connect(g);g.connect(param);o.start();};
+    // drone pad
+    [110,130.81,164.81,246.94,329.63,493.88].forEach((f,i)=>{
+      const g=ctx.createGain(); g.gain.value=.05/(1+i*.35); g.connect(bus);
+      ['sine','triangle'].forEach((t,k)=>{const o=ctx.createOscillator();o.type=t;o.frequency.value=f*(k?1.004:1);const og=ctx.createGain();og.gain.value=k?.35:1;o.connect(og);og.connect(g);o.start();});
+      lfo(.04+i*.017, .03/(1+i*.35), g.gain);
+    });
+    // wind
+    const nb = ctx.createBuffer(1, ctx.sampleRate*4, ctx.sampleRate), nd=nb.getChannelData(0);
+    let b=0; for(let i=0;i<nd.length;i++){b=.985*b+.015*(Math.random()*2-1);nd[i]=b*6}
+    const ns=ctx.createBufferSource(); ns.buffer=nb; ns.loop=true;
+    const bp=ctx.createBiquadFilter(); bp.type='bandpass'; bp.frequency.value=420; bp.Q.value=.5;
+    const wg=ctx.createGain(); wg.gain.value=.22; ns.connect(bp); bp.connect(wg); wg.connect(bus); ns.start();
+    lfo(.07,220,bp.frequency); lfo(.05,.12,wg.gain);
+    // crickets
+    const chirp = () => {
+      if(!s.ctx) return;
+      const t=ctx.currentTime+.05, o=ctx.createOscillator(), g=ctx.createGain(), p=ctx.createStereoPanner?ctx.createStereoPanner():null;
+      o.frequency.value=3900+Math.random()*900; g.gain.value=0;
+      const n=2+Math.floor(Math.random()*3);
+      for(let i=0;i<n;i++){const a=t+i*.07;g.gain.setValueAtTime(0,a);g.gain.linearRampToValueAtTime(.012,a+.012);g.gain.linearRampToValueAtTime(0,a+.05);}
+      o.connect(g); if(p){p.pan.value=Math.random()*2-1;g.connect(p);p.connect(bus)}else g.connect(bus);
+      o.start(t); o.stop(t+n*.07+.1);
+      setTimeout(chirp, 500+Math.random()*2200);
+    };
+    chirp();
+  }
+  s.initAudio = () => { s.isInitialized = true; };
+  s.toggleMute = () => {
+    if(!s.ctx) build();
+    if(s.ctx.state==='suspended') s.ctx.resume();
+    s.muted = !s.muted;
+    s.master.gain.cancelScheduledValues(s.ctx.currentTime);
+    s.master.gain.setTargetAtTime(s.muted?0:.7, s.ctx.currentTime, .6);
+    return s.muted;
+  };
+  s.setMuffle = on => { if(s.ctx) s.filter.frequency.setTargetAtTime(on?420:16000, s.ctx.currentTime, on?.35:.5); };
+  return () => s;
+})();
+
+/* ------------------------------------------------------------------ */
+/*  Shaders                                                            */
+/* ------------------------------------------------------------------ */
+const FOG = new THREE.Color(0.006,0.009,0.007);
+
+const flowerVert = /* glsl */`
+attribute float aSeed; attribute float aSize; attribute vec3 aColor; attribute float aType;
+uniform float uTime,uResY,uDisperse,uMouseStr,uAspect,uFogD,uMouse2Str;
+uniform vec2 uMouse,uMouse2;
+varying vec3 vColor; varying float vFog,vGlow,vGlow2,vType,vSeed,vDsp;
+void main(){
+  vec3 p = position;
+  float sway = sin(uTime*.9 + p.z*.35 + p.x*.2 + aSeed*6.)*.035 + sin(uTime*1.7+aSeed*20.)*.012;
+  p.x += sway; p.z += sway*.6;
+  vec4 mv = modelViewMatrix*vec4(p,1.);
+  float dist = -mv.z;
+  float r1=fract(aSeed*91.7), r2=fract(aSeed*47.3), r3=fract(aSeed*13.9);
+  // hover: flowers lift off and disperse into floating glowing particles
+  float dsp = uDisperse*(.5+r3);
+  vec2 dir = normalize(mv.xy + vec2(r1-.5,r2-.5)*1.5 + 1e-4);
+  mv.xy += dir*dsp*(1.2+max(dist,0.)*.1);
+  mv.y  += dsp*(.4+r2*2.2) + sin(uTime*.5+aSeed*30.)*.4*uDisperse;
+  mv.x  += cos(uTime*.4+aSeed*20.)*.4*uDisperse;
+  // flowers open up as they approach, leaves grow in further back
+  float scale = aType<.5 ? mix(.45,1.,smoothstep(34.,7.,dist)) : mix(.55,1.,smoothstep(2.,18.,dist));
+  scale *= smoothstep(.3,1.2,dist);
+  scale = mix(scale, .14+.1*r1, uDisperse);
+  vec4 clip = projectionMatrix*mv;
+  // mouse: screen-space push away from the cursor
+  vec2 ndc = clip.xy/clip.w;
+  vec2 dm = ndc-uMouse; dm.x *= uAspect;
+  float md = length(dm);
+  float push = uMouseStr*.12*exp(-md*md*7.);
+  vec2 pd = dm/(md+1e-4)*push;
+  vec2 dm2 = ndc-uMouse2; dm2.x *= uAspect; float md2 = length(dm2);
+  pd += dm2/(md2+1e-4)*uMouse2Str*.12*exp(-md2*md2*7.);
+  pd.x /= uAspect;
+  vGlow2 = uMouse2Str*exp(-md2*md2*22.);
+  clip.xy = (ndc+pd)*clip.w;
+  gl_Position = clip;
+  vGlow = uMouseStr*exp(-md*md*22.);
+  gl_PointSize = clamp(aSize*scale*projectionMatrix[1][1]*uResY*.5/max(dist,.1), 0., 220.);
+  vFog = 1.-exp(-pow(max(dist,0.)*uFogD,2.));
+  vColor=aColor; vType=aType; vSeed=aSeed; vDsp=uDisperse;
+}`;
+const flowerFrag = /* glsl */`
+uniform vec3 uFog;
+varying vec3 vColor; varying float vFog,vGlow,vGlow2,vType,vSeed,vDsp;
+void main(){
+  vec2 p = gl_PointCoord*2.-1.;
+  float a0 = vSeed*6.2831, cs=cos(a0), sn=sin(a0);
+  p = mat2(cs,-sn,sn,cs)*p;
+  float r = length(p), ang = atan(p.y,p.x), a; vec3 col;
+  if(vType<.5){
+    float n = floor(5.+fract(vSeed*7.1)*2.);
+    float k = abs(cos(ang*n*.5));
+    float petal = .36+.64*pow(k,.65);
+    a = smoothstep(petal, petal-.14, r);
+    float t = r/petal;
+    col = vColor*(.5+.65*t);
+    col *= .9+.1*cos(ang*n*4.);
+    col = mix(col, vColor*.45, smoothstep(.6,1.,t)*(1.-k)*.7);
+    vec3 cc = fract(vSeed*3.7)<.5 ? vec3(1.,.8,.22) : vec3(.95,.55,.18);
+    float core = smoothstep(.22,.12,r);
+    col = mix(col, cc, core);
+    col = mix(col, cc*.45, smoothstep(.07,0.,r)*.7);
+  } else {
+    float e = length(vec2(p.x*2.2, p.y));
+    a = smoothstep(1.,.84,e);
+    col = vColor*(.65+.55*(.5-.5*p.y));
+    col = mix(col, vColor*1.35, smoothstep(.07,0.,abs(p.x))*.5);
+  }
+  if(vType<.5){ a = mix(a, smoothstep(.6,.3,r), vDsp); col = mix(col, mix(vColor,vec3(1.),.45)*2.1, vDsp*.85); }
+  else { a *= 1.-vDsp*.8; }
+  col *= .82+.22*sin(vSeed*40.);
+  col += vGlow*vec3(1.,.8,.88)*(vType<.5?.8:.18);
+  col += vGlow2*vec3(1.,.5,.72)*(vType<.5?1.:.25);
+  col = mix(col, uFog, vFog*(1.-vDsp*.6));
+  if(a<.3) discard;
+  gl_FragColor = vec4(col, smoothstep(.3,.75,a));
+}`;
+
+const terrainVert = /* glsl */`
+attribute float aH; varying float vDist,vH; varying vec3 vW;
+void main(){ vW=position; vec4 mv=modelViewMatrix*vec4(position,1.); vDist=-mv.z; vH=aH; gl_Position=projectionMatrix*mv; }`;
+const terrainFrag = /* glsl */`
+uniform vec3 uFog; uniform float uFogD; varying float vDist,vH; varying vec3 vW;
+float h21(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
+float vn(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(h21(i),h21(i+vec2(1,0)),f.x),mix(h21(i+vec2(0,1)),h21(i+1.),f.x),f.y);}
+void main(){
+  float n = vn(vW.xz*3.)*.5+vn(vW.xz*7.3)*.3+vn(vW.xz*17.)*.2;
+  vec3 c = mix(vec3(.012,.026,.01), vec3(.06,.12,.045), n);
+  c *= .7+.35*vn(vW.xz*.35);
+  float fog = 1.-exp(-pow(vDist*uFogD,2.));
+  gl_FragColor = vec4(mix(c,uFog,fog),1.);
+}`;
+const skyVert = /* glsl */`varying vec3 vP; void main(){ vP=position; vec4 mv=modelViewMatrix*vec4(position,1.); gl_Position=projectionMatrix*mv; }`;
+const skyFrag = /* glsl */`
+varying vec3 vP; uniform vec3 uFog;
+float h(vec3 p){return fract(sin(dot(p,vec3(12.9898,78.233,45.164)))*43758.5453);}
+void main(){
+  vec3 d = normalize(vP);
+  float y = d.y;
+  vec3 c = mix(vec3(.018,.026,.024), uFog, smoothstep(-.05,.45,y));
+  c += vec3(.03,.04,.04)*exp(-abs(y-.02)*14.)*.6;
+  vec3 g = floor(d*420.);
+  float st = step(.9965, h(g))*smoothstep(.05,.4,y);
+  c += st*vec3(.7,.75,.9)*h(g+1.);
+  gl_FragColor = vec4(c,1.);
+}`;
+
+const rayVert = /* glsl */`varying vec2 vUv; void main(){ vUv=uv; gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.); }`;
+const rayFrag = /* glsl */`
+varying vec2 vUv; uniform float uTime,uSeed,uOp;
+void main(){
+  float x = abs(vUv.x-.5)*2.;
+  float beam = pow(smoothstep(1.,0.,x),2.);
+  float fade = smoothstep(0.,.45,vUv.y)*smoothstep(1.,.55,vUv.y);
+  float flick = .55+.45*sin(uTime*.35+uSeed*10.);
+  float stripes = .65+.35*sin(vUv.x*26.+uTime*.4+uSeed*5.);
+  gl_FragColor = vec4(vec3(.7,.82,1.)*beam*fade*flick*stripes*uOp*.07, 1.);
+}`;
+
+const dustVert = /* glsl */`
+attribute float aSeed; uniform float uTime,uResY,uDisperse; uniform vec3 uCam;
+varying float vA;
+void main(){
+  vec3 drift = vec3(sin(aSeed*20.)*.25, .12+fract(aSeed*7.)*.2, cos(aSeed*13.)*.25)*uTime*(1.+uDisperse*2.);
+  vec3 p = mod(position + drift - uCam + 18., 36.) - 18. + uCam;
+  p += vec3(sin(uTime*.6+aSeed*40.), cos(uTime*.5+aSeed*31.), sin(uTime*.4+aSeed*17.))*.3;
+  vec4 mv = modelViewMatrix*vec4(p,1.);
+  float dist=-mv.z;
+  gl_Position = projectionMatrix*mv;
+  gl_PointSize = clamp((.05+fract(aSeed*3.3)*.06)*projectionMatrix[1][1]*uResY*.5/max(dist,.1), 0., 24.);
+  vA = smoothstep(1.,3.,dist)*smoothstep(18.,8.,dist)*(.5+.5*sin(uTime*1.3+aSeed*60.));
+}`;
+const dustFrag = /* glsl */`
+varying float vA;
+void main(){ vec2 p=gl_PointCoord*2.-1.; float r=dot(p,p); float a=exp(-r*4.)*vA*.6; if(a<.003) discard; gl_FragColor=vec4(vec3(1.,.93,.8),a); }`;
+
+
+const memVert = /* glsl */`
+attribute float aSeed, aBorn; attribute vec3 aColor;
+uniform float uTime,uResY,uFogD,uDisperse;
+varying vec3 vColor; varying float vA,vSeed;
+void main(){
+  vec3 p = position; p.y += sin(uTime*.8+aSeed*30.)*.12 + uDisperse*.6;
+  vec4 mv = modelViewMatrix*vec4(p,1.); float dist = -mv.z;
+  float grow = aBorn < 0. ? 1. : smoothstep(aBorn, aBorn+2.8, uTime);
+  float size = .62*(.86+.14*sin(uTime*2.+aSeed*50.))*grow*(1.+ (1.-grow)*0.);
+  gl_Position = projectionMatrix*mv;
+  gl_PointSize = clamp(size*projectionMatrix[1][1]*uResY*.5/max(dist,.1), 0., 170.);
+  float fog = 1.-exp(-pow(max(dist,0.)*uFogD*.8,2.));
+  vA = (1.-fog)*smoothstep(.6,2.,dist)*(1.+ (aBorn<0.?0.:(1.-smoothstep(aBorn, aBorn+5., uTime))*1.5));
+  vColor = aColor; vSeed = aSeed;
+}`;
+const memFrag = /* glsl */`
+varying vec3 vColor; varying float vA,vSeed;
+void main(){
+  vec2 p = gl_PointCoord*2.-1.;
+  float a0=vSeed*6.2831, cs=cos(a0), sn=sin(a0); p = mat2(cs,-sn,sn,cs)*p;
+  float r = length(p), k = abs(cos(atan(p.y,p.x)*2.5));
+  float petal = .3+.38*pow(k,.6);
+  float shape = smoothstep(petal, petal-.08, r);
+  float halo = exp(-r*r*5.)*.6;
+  float core = smoothstep(.12,0.,r);
+  vec3 col = vColor*(shape*(.7+.6*r/petal) + halo) + vec3(1.,.93,.75)*core*1.2;
+  gl_FragColor = vec4(col*vA, 1.);
+}`;
+
+const FinalShader = {
+  uniforms:{tDiffuse:{value:null},uTime:{value:0},uSpeed:{value:0},uRes:{value:new THREE.Vector2(1,1)}},
+  vertexShader:`varying vec2 vUv; void main(){vUv=uv; gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}`,
+  fragmentShader:`
+  uniform sampler2D tDiffuse; uniform float uTime,uSpeed; uniform vec2 uRes; varying vec2 vUv;
+  float rnd(vec2 p){return fract(sin(dot(p,vec2(12.9898,78.233)))*43758.5453);}
+  void main(){
+    vec2 c = vUv-.5; float asp = uRes.x/uRes.y;
+    vec2 cc = c*vec2(asp,1.); float r2 = dot(cc,cc), r = sqrt(r2);
+    vec2 uv = .5 + c*(.97 - .07*r2);                       // lens bulge
+    float n0 = rnd(vUv*uRes + fract(uTime*7.)*91.);
+    float blur = smoothstep(.2,.78,r)*(.011+uSpeed*.008);  // depth-of-field toward the edges
+    vec2 ca = c*(.002+.02*r2+uSpeed*.006);                  // split RGB fringe at the edges
+    vec3 acc = vec3(0.);
+    for(int i=0;i<TAPS;i++){
+      float fi = float(i), ang = fi*2.39996 + n0*6.2831, rad = sqrt((fi+.5)/float(TAPS))*blur;
+      vec2 o = vec2(cos(ang),sin(ang))*rad*vec2(1./asp,1.);
+      acc.r += texture2D(tDiffuse,uv+o+ca).r; acc.g += texture2D(tDiffuse,uv+o).g; acc.b += texture2D(tDiffuse,uv+o-ca).b;
+    }
+    vec3 col = acc/float(TAPS);
+    col += (n0-.5)*.045;
+    float v = 1.-smoothstep(.42-uSpeed*.12, 1.05-uSpeed*.25, r);
+    gl_FragColor = vec4(col*mix(.12,1.,v),1.);
+  }`
+};
+
+/* ------------------------------------------------------------------ */
+/*  Valley                                                             */
+/* ------------------------------------------------------------------ */
+const ease = t => 1-Math.pow(1-t,3);
+const hgt = (t,d) => {
+  const ad=Math.abs(d), T=t*Math.PI*2;
+  return Math.pow(Math.max(ad-3.5,0),1.38)*.3
+    + Math.sin(T*7+d*.21)*1.1 + Math.sin(T*17-d*.37)*.5 + Math.sin(d*.9+T*80)*.15*Math.min(ad*.3,1);
+};
+
+class Valley {
+  constructor(el, onLoaded, onIntroDone){
+    this.el = el; this.onLoaded = onLoaded; this.onIntroDone = onIntroDone;
+    const mobile = innerWidth<820 || matchMedia('(pointer:coarse)').matches;
+    this.reduced = matchMedia('(prefers-reduced-motion:reduce)').matches;
+    this.pr = Math.min(devicePixelRatio||1, mobile?1.3:1.75); this.mobile = mobile;
+
+    const r = this.renderer = new THREE.WebGLRenderer({antialias:false, powerPreference:'high-performance'});
+    r.outputColorSpace = THREE.LinearSRGBColorSpace;
+    r.setPixelRatio(this.pr); r.setSize(innerWidth, innerHeight);
+    r.setClearColor(FOG,1);
+    el.querySelector('.js-canvas-container').appendChild(r.domElement);
+
+    this.scene = new THREE.Scene();
+    this.camera = new THREE.PerspectiveCamera(55, innerWidth/innerHeight, .1, 600);
+    this.fogD = .03;
+
+    // camera path: a gently winding closed loop
+    const pts=[]; for(let i=0;i<14;i++){const a=i/14*Math.PI*2, rr=82+10*Math.sin(a*3)+5*Math.cos(a*5);pts.push(new THREE.Vector3(Math.cos(a)*rr, Math.sin(a*2)*4+Math.sin(a*5)*1.5, Math.sin(a)*rr));}
+    this.curve = new THREE.CatmullRomCurve3(pts, true, 'centripetal');
+    this.LEN = this.curve.getLength();
+    const N = this.N = 2400, up = new THREE.Vector3(0,1,0);
+    this.P=[]; this.S=[];
+    for(let i=0;i<N;i++){const t=i/N, p=this.curve.getPointAt(t), tg=this.curve.getTangentAt(t);this.P.push(p);this.S.push(new THREE.Vector3().crossVectors(tg,up).normalize());}
+
+    this.buildSky(); this.buildTerrain(); this.buildFlowers(mobile?55000:150000, mobile?65000:200000);
+    this.buildRays(); this.buildDust(mobile?500:1600);
+    this.buildMemory();
+
+    // post
+    const comp = this.composer = new EffectComposer(r);
+    comp.setPixelRatio(this.pr); comp.setSize(innerWidth, innerHeight);
+    comp.addPass(new RenderPass(this.scene, this.camera));
+    this.bloom = new UnrealBloomPass(new THREE.Vector2(innerWidth, innerHeight), .55, .5, .55);
+    comp.addPass(this.bloom);
+    FinalShader.defines = {TAPS: mobile?6:12};
+    this.final = new ShaderPass(FinalShader); comp.addPass(this.final);
+
+    // state
+    this.prog = .0; this.target = .0; this.speed = 0; this.time = 0;
+    this.remote = new THREE.Vector2(); this.remoteT = new THREE.Vector2(); this.remoteStr = 0; this.remoteStrT = 0; this.pingStr = 0; this.lite = false; this.frameN = 0;
+    this.hover = 0; this.hoverTarget = 0; this.intro = 0; this.loaded = false;
+    this.mouse = new THREE.Vector2(0,0); this.mouseE = new THREE.Vector2(0,0); this.mouseStrT = 0; this.mouseStr = 0;
+    this.bind();
+    this.clock = new THREE.Clock();
+    r.setAnimationLoop(() => this.tick());
+  }
+
+  frame(t){ const i=((Math.floor(t*this.N)%this.N)+this.N)%this.N; return [this.P[i], this.S[i]]; }
+
+  buildSky(){
+    this.sky = new THREE.Mesh(new THREE.SphereGeometry(400,32,16), new THREE.ShaderMaterial({vertexShader:skyVert, fragmentShader:skyFrag, uniforms:{uFog:{value:FOG}}, side:THREE.BackSide, depthWrite:false}));
+    this.sky.renderOrder=-1; this.scene.add(this.sky);
+  }
+
+  buildTerrain(){
+    const U=1600, V=90, D=32, pos=new Float32Array((U)*(V+1)*3), ah=new Float32Array(U*(V+1)), idx=[];
+    for(let u=0;u<U;u++){const t=u/U,[p,s]=this.frame(t);
+      for(let v=0;v<=V;v++){const d=-D+2*D*v/V, h=hgt(t,d), k=u*(V+1)+v;
+        pos[k*3]=p.x+s.x*d; pos[k*3+1]=p.y+h-.05; pos[k*3+2]=p.z+s.z*d; ah[k]=h;}}
+    for(let u=0;u<U;u++){const u2=(u+1)%U;for(let v=0;v<V;v++){const a=u*(V+1)+v,b=u2*(V+1)+v;idx.push(a,b,a+1,b,b+1,a+1);}}
+    const g=new THREE.BufferGeometry(); g.setAttribute('position',new THREE.BufferAttribute(pos,3)); g.setAttribute('aH',new THREE.BufferAttribute(ah,1)); g.setIndex(idx);
+    this.terrainMat = new THREE.ShaderMaterial({vertexShader:terrainVert, fragmentShader:terrainFrag, uniforms:{uFog:{value:FOG},uFogD:{value:this.fogD}}, side:THREE.DoubleSide});
+    this.scene.add(new THREE.Mesh(g,this.terrainMat));
+  }
+
+  buildFlowers(nF, nL){
+    const n=nF+nL, pos=new Float32Array(n*3), col=new Float32Array(n*3), seed=new Float32Array(n), size=new Float32Array(n), type=new Float32Array(n);
+    const C={violet:[.56,.4,.92],lav:[.74,.62,.98],blue:[.45,.55,1],yel:[1,.86,.28],orange:[1,.62,.28],white:[.96,.93,.88],pink:[1,.56,.72],hot:[.96,.32,.58],red:[.92,.22,.28]};
+    const pickFrom=a=>C[a[(Math.random()*a.length)|0]];
+    const WH=[[.97,.96,.93],[1,.97,.9],[.93,.95,1],[1,.94,.95],[.95,.97,.94]];
+    const pick=()=>WH[(Math.random()*WH.length)|0];
+    for(let i=0;i<n;i++){
+      const leaf=i>=nF, t=Math.random(), [p,s]=this.frame(t);
+      const d=(Math.random()*2-1)*(leaf?29:27);
+      const h=hgt(t,d)+(leaf?.03+Math.random()*.35:.15+Math.random()*.6);
+      pos[i*3]=p.x+s.x*d; pos[i*3+1]=p.y+h; pos[i*3+2]=p.z+s.z*d;
+      seed[i]=Math.random(); type[i]=leaf?1:0;
+      if(leaf){ size[i]=.42+Math.random()*.45; const g=Math.random(); const yl=Math.random()<.15; col.set(yl?[.13+g*.06,.22+g*.08,.07]:[.03+.08*g,.09+.18*g,.035+.06*g],i*3); }
+      else { size[i]=(.17+Math.random()*.15)*(Math.random()<.07?1.6:1); const c=pick(), b=.62+Math.random()*.3; col.set([c[0]*b,c[1]*b,c[2]*b],i*3); }
+    }
+    const g=new THREE.BufferGeometry();
+    g.setAttribute('position',new THREE.BufferAttribute(pos,3)); g.setAttribute('aColor',new THREE.BufferAttribute(col,3));
+    g.setAttribute('aSeed',new THREE.BufferAttribute(seed,1)); g.setAttribute('aSize',new THREE.BufferAttribute(size,1)); g.setAttribute('aType',new THREE.BufferAttribute(type,1));
+    this.fu = {uTime:{value:0},uResY:{value:innerHeight*this.pr},uDisperse:{value:0},uMouseStr:{value:0},uAspect:{value:innerWidth/innerHeight},uMouse:{value:new THREE.Vector2()},uMouse2:{value:new THREE.Vector2()},uMouse2Str:{value:0},uFogD:{value:this.fogD},uFog:{value:FOG}};
+    const m=new THREE.ShaderMaterial({vertexShader:flowerVert, fragmentShader:flowerFrag, uniforms:this.fu, transparent:true, depthWrite:true, blending:THREE.NormalBlending});
+    const pts=new THREE.Points(g,m); pts.frustumCulled=false; this.scene.add(pts);
+  }
+
+  buildMemory(){
+    this.mu = {uTime:{value:0},uResY:{value:innerHeight*this.pr},uFogD:{value:this.fogD},uDisperse:{value:0}};
+    this.memMat = new THREE.ShaderMaterial({vertexShader:memVert, fragmentShader:memFrag, uniforms:this.mu, transparent:true, depthWrite:false, blending:THREE.AdditiveBlending});
+    this.memBorn = new Map(); this.memPts = null; this.loadAt = Date.now();
+  }
+
+  /* glowing flowers we plant by missing each other: items = [{id, t, d, warm, at}] */
+  setMemory(items){
+    const n = items.length;
+    const pos=new Float32Array(n*3), col=new Float32Array(n*3), seed=new Float32Array(n), born=new Float32Array(n);
+    const up=new THREE.Vector3(0,1,0);
+    items.forEach((it,i)=>{
+      const t=((it.t%1)+1)%1, d=Math.max(-8,Math.min(8,it.d||0));
+      const p=this.curve.getPointAt(t), s=new THREE.Vector3().crossVectors(this.curve.getTangentAt(t),up).normalize();
+      pos.set([p.x+s.x*d, p.y+hgt(t,d)+.95, p.z+s.z*d], i*3);
+      col.set(it.warm?[1,.52,.72]:[.72,.62,1], i*3);
+      let h=0; for(const ch of String(it.id)) h=(h*31+ch.charCodeAt(0))>>>0; seed[i]=(h%1000)/1000;
+      if(!this.memBorn.has(it.id)) this.memBorn.set(it.id, (it.at||0) > this.loadAt-4000 ? this.time : -1);
+      born[i]=this.memBorn.get(it.id);
+    });
+    const g=new THREE.BufferGeometry();
+    g.setAttribute('position',new THREE.BufferAttribute(pos,3)); g.setAttribute('aColor',new THREE.BufferAttribute(col,3));
+    g.setAttribute('aSeed',new THREE.BufferAttribute(seed,1)); g.setAttribute('aBorn',new THREE.BufferAttribute(born,1));
+    if(this.memPts){ this.memPts.geometry.dispose(); this.memPts.geometry=g; }
+    else { this.memPts=new THREE.Points(g,this.memMat); this.memPts.frustumCulled=false; this.scene.add(this.memPts); }
+  }
+  /* where a new flower should go: just ahead of where we are now */
+  aheadT(){ return ((this.prog+.02)%1+1)%1; }
+  /* partner's finger or cursor, in screen coords (-1..1) */
+  setRemote(x,y,on){ if(on){ if(this.remoteStrT===0) this.remote.set(x,y); this.remoteT.set(x,y); } this.remoteStrT = on?1:0; }
+  ping(x,y){ this.remote.set(x,y); this.remoteT.set(x,y); this.pingStr = 1.4; }
+
+  buildRays(){
+    this.rays=[];
+    for(let i=0;i<16;i++){
+      const t=i/16+Math.random()*.03, [p,s]=this.frame(t), d=(Math.random()*2-1)*12;
+      const m=new THREE.ShaderMaterial({vertexShader:rayVert, fragmentShader:rayFrag, uniforms:{uTime:{value:0},uSeed:{value:Math.random()},uOp:{value:0}}, transparent:true, depthWrite:false, blending:THREE.AdditiveBlending});
+      const mesh=new THREE.Mesh(new THREE.PlaneGeometry(5+Math.random()*5, 46), m);
+      mesh.position.set(p.x+s.x*d, p.y+hgt(t,d)+16, p.z+s.z*d);
+      mesh.userData.tilt=(Math.random()*2-1)*.35; mesh.frustumCulled=false;
+      this.rays.push(mesh); this.scene.add(mesh);
+    }
+  }
+
+  buildDust(n){
+    const pos=new Float32Array(n*3), seed=new Float32Array(n);
+    for(let i=0;i<n;i++){pos.set([(Math.random()*2-1)*18,(Math.random()*2-1)*18,(Math.random()*2-1)*18],i*3);seed[i]=Math.random();}
+    const g=new THREE.BufferGeometry(); g.setAttribute('position',new THREE.BufferAttribute(pos,3)); g.setAttribute('aSeed',new THREE.BufferAttribute(seed,1));
+    this.du={uTime:{value:0},uResY:{value:innerHeight*this.pr},uCam:{value:new THREE.Vector3()},uDisperse:{value:0}};
+    const p=new THREE.Points(g,new THREE.ShaderMaterial({vertexShader:dustVert, fragmentShader:dustFrag, uniforms:this.du, transparent:true, depthWrite:false, blending:THREE.AdditiveBlending}));
+    p.frustumCulled=false; this.scene.add(p);
+  }
+
+  bind(){
+    // virtual scroller: wheel and touch move along the path
+    const WHEEL=.000045, TOUCH=WHEEL*20*.16;
+    const inUI = e => e.target && e.target.closest && e.target.closest('.panel,.modal,.sheet,.tabbar');
+    addEventListener('wheel', e => { if(this.intro<.6 || inUI(e)) return; let d=e.deltaY; if(e.deltaMode===1) d*=33; this.target += Math.max(-300,Math.min(300,d))*WHEEL; }, {passive:true});
+    let ty=null;
+    addEventListener('touchstart', e => { ty = inUI(e) ? null : e.touches[0].clientY; }, {passive:true});
+    addEventListener('touchmove', e => {
+      if(ty===null) return; const y=e.touches[0].clientY;
+      if(this.intro>.6) this.target += (ty-y)*TOUCH; ty=y;
+      if(!e.target.closest('a,button,input,textarea,label')) e.preventDefault();
+    }, {passive:false});
+    addEventListener('touchend', () => { ty=null; });
+    addEventListener('pointermove', e => { this.mouse.set(e.clientX/innerWidth*2-1, -(e.clientY/innerHeight*2-1)); this.mouseStrT=1; });
+    document.documentElement.addEventListener('pointerleave', () => { this.mouseStrT=0; });
+    addEventListener('blur', () => { this.mouseStrT=0; });
+    addEventListener('resize', () => this.resize());
+  }
+
+  resize(){
+    const w=innerWidth,h=innerHeight;
+    this.camera.aspect=w/h; this.camera.updateProjectionMatrix();
+    this.renderer.setSize(w,h); this.composer.setSize(w,h); this.bloom.setSize(w*this.pr,h*this.pr);
+    this.fu.uResY.value=this.du.uResY.value=h*this.pr; if(this.mu) this.mu.uResY.value=h*this.pr; this.fu.uAspect.value=w/h;
+  }
+
+  startHoverTransition(){ this.hoverTarget=1; audioStore().setMuffle(true); }
+  stopHoverTransition(){ this.hoverTarget=0; audioStore().setMuffle(false); }
+
+  tick(){
+    const dt=Math.min(this.clock.getDelta(),.05); this.time+=dt;
+    if(this.loaded) this.intro=Math.min(1,this.intro+dt/3.4);
+    this.hover += (this.hoverTarget-this.hover)*Math.min(1,dt*(this.hoverTarget?1.4:1.9));
+    const hv=this.hover, fly=1-hv;
+
+    // idle drift forward; hovering eases the flight to a stop
+    this.target += dt*.0012*fly*(this.reduced?.35:1)*(.3+.7*ease(this.intro));
+    if(this.hoverTarget) this.target += (this.prog-this.target)*Math.min(1,dt*2.5);
+    const prev=this.prog; this.prog += (this.target-this.prog)*Math.min(1,dt*2.2);
+    const v=Math.abs(this.prog-prev)*this.LEN/Math.max(dt,1e-4);
+    this.speed += (Math.min(1,Math.max(0,(v-.4)/7))-this.speed)*Math.min(1,dt*3);
+
+    // camera on the path
+    const t=((this.prog%1)+1)%1, ta=t+.016;
+    const p=this.curve.getPointAt(t), pa=this.curve.getPointAt(((ta%1)+1)%1);
+    const ie=ease(this.intro);
+    const cam=this.camera;
+    cam.position.set(p.x, p.y+hgt(t,0)+2.6+(1-ie)*20, p.z);
+    const look=new THREE.Vector3(pa.x, pa.y+hgt(ta,0)+.2, pa.z);
+    if(ie<1){ const back=this.curve.getTangentAt(t).multiplyScalar(-(1-ie)*10); cam.position.add(back); }
+    cam.lookAt(look);
+    this.mouseE.lerp(this.mouse, Math.min(1,dt*3));
+    cam.rotateY(-this.mouseE.x*.06); cam.rotateX(this.mouseE.y*.04);
+    cam.updateMatrixWorld();
+
+    this.mouseStr += (this.mouseStrT*ie-this.mouseStr)*Math.min(1,dt*3);
+    const dsp = hv*hv*(3-2*hv);
+    this.fu.uTime.value=this.time; this.fu.uDisperse.value=dsp; this.fu.uMouseStr.value=this.mouseStr*(1-dsp*.6);
+    this.fu.uMouse.value.copy(this.mouseE);
+    this.remote.lerp(this.remoteT, Math.min(1,dt*5)); this.remoteStr += (this.remoteStrT-this.remoteStr)*Math.min(1,dt*3); this.pingStr *= Math.exp(-dt*1.4);
+    this.fu.uMouse2.value.copy(this.remote); this.fu.uMouse2Str.value = Math.min(1.4, Math.max(this.remoteStr, this.pingStr))*ie;
+    this.mu.uTime.value=this.time; this.mu.uResY.value=this.fu.uResY.value; this.mu.uDisperse.value=dsp;
+    this.du.uTime.value=this.time; this.du.uCam.value.copy(cam.position); this.du.uDisperse.value=dsp;
+    this.sky.position.copy(cam.position);
+    for(const r of this.rays){
+      r.quaternion.copy(cam.quaternion); r.rotateZ(r.userData.tilt);
+      const d=r.position.distanceTo(cam.position);
+      r.material.uniforms.uOp.value=THREE.MathUtils.smoothstep(d,4,14)*(1-THREE.MathUtils.smoothstep(d,40,100));
+      r.material.uniforms.uTime.value=this.time;
+    }
+    this.bloom.strength=.55+dsp*.6;
+    const fu=this.final.uniforms; fu.uTime.value=this.time; fu.uSpeed.value=this.speed; fu.uRes.value.set(innerWidth,innerHeight);
+
+    if(!(this.lite && (this.frameN++ & 1))) this.composer.render();
+
+    if(!this.loaded){ this.loaded=true; setTimeout(()=>this.onLoaded&&this.onLoaded(), 350); }
+    if(this.intro>=1 && this.onIntroDone) this.onIntroDone();
+  }
+}
+
+window.__GE = {et:()=>Valley, Y:()=>audioStore};
+
+/* ================================================================== */
+/*  Boot the valley                                                   */
+/* ================================================================== */
+const $ = s => document.querySelector(s);
+const loader=$('#loader'), ui=$('#ui');
+let introShown=false, valley=null;
+try{
+  valley=new Valley($('#valley'),
+    ()=>loader.classList.add('gone'),
+    ()=>{ if(!introShown){ introShown=true; ui.classList.add('on'); } });
+}catch(err){ console.error(err); loader.classList.add('gone'); ui.classList.add('on'); }
+setTimeout(()=>{ loader.classList.add('gone'); if(!introShown){introShown=true;ui.classList.add('on');} }, 9000);
+audioStore().initAudio();
+const sound=$('#sound');
+sound.onclick=()=>{ const s=audioStore(); if(!s.isInitialized) return; try{ const muted=s.toggleMute(); sound.setAttribute('aria-pressed', String(!muted)); }catch(e){} };
+
+// several things can ask the valley to disperse (heart hover, open panel, a pulse)
+const disp=new Set();
+const setDisp=(k,on)=>{ on?disp.add(k):disp.delete(k); if(!valley) return; disp.size?valley.startHoverTransition():valley.stopHoverTransition(); };
+
+/* ================================================================== */
+/*  Helpers                                                           */
+/* ================================================================== */
+const el=(tag,cls,text)=>{const e=document.createElement(tag); if(cls) e.className=cls; if(text!=null) e.textContent=text; return e;};
+const toastEl=$('#toast'); let toastT;
+const toast=m=>{ toastEl.textContent=m; toastEl.classList.add('on'); clearTimeout(toastT); toastT=setTimeout(()=>toastEl.classList.remove('on'),2800); };
+const pad=n=>String(n).padStart(2,'0');
+const fmtDate=ts=>{const d=new Date(ts);return `${d.getFullYear()}.${pad(d.getMonth()+1)}.${pad(d.getDate())}`;};
+const ago=ts=>{ const s=(Date.now()-ts)/1000; if(s<60) return 'саяхан'; if(s<3600) return `${Math.floor(s/60)} минутын өмнө`; if(s<86400) return `${Math.floor(s/3600)} цагийн өмнө`; if(s<86400*30) return `${Math.floor(s/86400)} өдрийн өмнө`; return fmtDate(ts); };
+const parseDay=s=>{ if(!s||!/^\d{4}-\d{2}-\d{2}$/.test(s)) return null; const [y,m,d]=s.split('-').map(Number); return new Date(y,m-1,d).getTime(); };
+const safeUrl=u=>{ try{ const x=new URL(u); return /^https?:$/.test(x.protocol)?x.href:null; }catch{ return null; } };
+const validTz=tz=>{ try{ new Intl.DateTimeFormat('en',{timeZone:tz}); return true; }catch{ return false; } };
+const myTz=Intl.DateTimeFormat().resolvedOptions().timeZone||'Asia/Shanghai';
+
+/* ================================================================== */
+/*  Navigation                                                        */
+/* ================================================================== */
+const VIEWS=['zurag','zahidal','hairtsag','tuuh','asuult','hamt','duu','husel','tohirgoo','buhheg'];
+const MORE=['asuult','hairtsag','buhheg','tuuh','duu','husel','tohirgoo'];
+function show(){
+  const v=location.hash.slice(1); const cur=VIEWS.includes(v)?v:'';
+  VIEWS.forEach(k=>$('#p-'+k).classList.toggle('open',k===cur));
+  $('#hero').classList.toggle('away',!!cur);
+  ui.classList.toggle('pnl',!!cur && innerWidth<=820);
+  document.querySelectorAll('nav a,.sheet a').forEach(a=>a.classList.toggle('cur',a.dataset.go===cur));
+  $('#moreBtn').classList.toggle('cur',MORE.includes(cur));
+  $('#sheet').classList.remove('open');
+  setDisp('panel',!!cur);
+  if(valley) valley.lite = !!cur && valley.mobile;
+  if(cur==='tohirgoo') fillSettings();
+  if(cur==='asuult') setTimeout(()=>{ renderQA(); renderMoods(); });
+  if(cur==='hairtsag') setTimeout(renderBoxes);
+  if(cur==='buhheg') setTimeout(()=>{ renderSlots(); drawBooth(); });
+  if(cur==='hamt') setTimeout(renderQuiz);
+}
+addEventListener('hashchange',show);
+$('#moreBtn').addEventListener('click',e=>{ e.stopPropagation(); $('#sheet').classList.toggle('open'); });
+document.addEventListener('click',e=>{
+  if(!e.target.closest('#sheet,#moreBtn')) $('#sheet').classList.remove('open');
+  const a=e.target.closest('[data-go]'); if(!a) return;
+  e.preventDefault(); const k=a.dataset.go;
+  if(k) location.hash=k; else history.replaceState(null,'',location.pathname+location.search), show();
+});
+document.addEventListener('keydown',e=>{ if(e.key!=='Escape') return; const m=document.querySelector('.modal.open'); if(m) closeModal(m); else if(location.hash) { history.replaceState(null,'',location.pathname+location.search); show(); } });
+show();
+
+const openModal=m=>{ m.classList.add('open'); const f=m.querySelector('input,textarea'); if(f) setTimeout(()=>f.focus(),60); };
+const closeModal=m=>m.classList.remove('open');
+document.querySelectorAll('.modal').forEach(m=>{ m.addEventListener('click',e=>{ if(e.target===m||e.target.closest('[data-close]')) closeModal(m); }); });
+
+/* ================================================================== */
+/*  Heart: hover disperses the valley, click says "I miss you"        */
+/* ================================================================== */
+const go=$('#go');
+go.addEventListener('pointerenter',()=>setDisp('heart',true));
+go.addEventListener('pointerleave',()=>setDisp('heart',false));
+function hearts(){
+  const r=go.getBoundingClientRect(), cols=['#f7b6c8','#f5efe2','#e89aa9','#d9c2ff','#ffd9a8'];
+  for(let i=0;i<16;i++){ const h=el('span','heart','♥'); h.style.left=(r.left+r.width/2-10+(Math.random()-.5)*30)+'px'; h.style.top=(r.top)+'px';
+    h.style.color=cols[i%cols.length]; h.style.fontSize=(14+Math.random()*18)+'px'; h.style.setProperty('--dx',((Math.random()-.5)*260)+'px'); h.style.setProperty('--r',((Math.random()-.5)*60)+'deg'); h.style.animationDelay=(Math.random()*.35)+'s';
+    document.body.appendChild(h); setTimeout(()=>h.remove(),3000); }
+}
+
+/* ================================================================== */
+/*  Shared store                                                      */
+/* ================================================================== */
+const S={db:null,user:null,me:null,canWrite:false,people:{},profiles:{},photos:[],letters:[],songs:[],wishes:[],miss:{},settings:{},videos:[],story:[],answers:[],garden:[],boxes:[],moods:[],quiz:[],quizAns:[],booth:{}};
+const nameOf=id=>{ if(!id) return 'Хайрт'; const n=S.people[id]?.name||S.profiles[id]?.name; return n||(id===S.me?'Би':'Хайрт'); };
+const partnerId=()=>Object.keys(S.people).find(id=>id!==S.me)||Object.keys(S.miss).find(id=>id!==S.me)||null;
+
+function setStatus(msg){ document.querySelectorAll('[data-status]').forEach(n=>{ n.hidden=!msg; n.textContent=msg||''; }); }
+function setWritable(on){ S.canWrite=on; document.querySelectorAll('[data-write]').forEach(n=>n.hidden=!on); }
+setWritable(false);
+
+async function resolveProfiles(){
+  if(!S.user||!S.user.profiles) return;
+  const ids=new Set([...Object.keys(S.people),...S.photos.map(p=>p.by),...S.letters.map(p=>p.by),...S.songs.map(p=>p.by),...S.wishes.map(p=>p.by),...S.videos.map(p=>p.by),...S.story.map(p=>p.by)].filter(Boolean));
+  try{ const ps=await S.user.profiles([...ids]); for(const id in ps) S.profiles[id]=ps[id]; }catch{}
+}
+
+(async()=>{
+  const C=window.claude;
+  if(!C||!C.use){ setStatus('Энэ хуудсыг claude.ai дээрх холбоосоор нь нээвэл зураг, захидал хадгалагдана.'); renderAll(); return; }
+  const [db,user]=await Promise.all([C.use('db').catch(()=>null),C.use('user').catch(()=>null)]);
+  S.db=db; S.user=user;
+  if(!db){ setStatus('Хадгалах сан холбогдсонгүй. Claude-д нэвтэрсэн эсэхээ шалгаад дахин нээгээрэй.'); renderAll(); return; }
+  try{ S.me=user?await user.id():null; }catch{}
+  let can=null; try{ can=user&&user.can?await user.can('data.write'):null; }catch{}
+  setWritable(can!==false);
+  if(can===false) setStatus('Танд энэ буланд зөвхөн харах эрх байна. Эзэн нь таныг Editor эрхээр урих хэрэгтэй.');
+  const slow=setTimeout(()=>setStatus('Хадгалах сантай холбогдож байна… удааширвал хуудсаа дахин нээгээрэй.'),10000);
+  let first=true; const ok=()=>{ if(first){ first=false; clearTimeout(slow); if(can!==false) setStatus(''); } };
+  const fail=e=>{ clearTimeout(slow); if(e&&e.code==='revoked'){ setWritable(false); setStatus('Энэ хуудсанд хандах эрх өөрчлөгдсөн байна.'); } };
+  const list=(path,key,order)=>db.collection(path).orderBy(order||'at','desc').limit(500).onSnapshot(s=>{ if(!s.metadata.fromCache) ok(); S[key]=s.docs.map(d=>({id:d.id,...d.data()})); render(key); resolveProfiles().then(()=>render(key)); },fail);
+  list('photos','photos'); list('letters','letters'); list('songs','songs'); list('videos','videos');
+  db.collection('story').orderBy('date','asc').limit(500).onSnapshot(s=>{ ok(); S.story=s.docs.map(d=>({id:d.id,...d.data()})); render('story'); },fail);
+  db.collection('answers').orderBy('day','desc').limit(200).onSnapshot(s=>{ ok(); S.answers=s.docs.map(d=>({id:d.id,...d.data()})); renderQA(); },fail);
+  db.collection('boxes').orderBy('n','asc').limit(400).onSnapshot(s=>{ S.boxes=s.docs.map(d=>({id:d.id,...d.data()})); renderBoxes(); },fail);
+  db.collection('moods').orderBy('day','desc').limit(400).onSnapshot(s=>{ S.moods=s.docs.map(d=>({id:d.id,...d.data()})); renderMoods(); },fail);
+  db.collection('quiz').orderBy('at','asc').limit(300).onSnapshot(s=>{ S.quiz=s.docs.map(d=>({id:d.id,...d.data()})); renderQuiz(); },fail);
+  db.collection('quizAns').limit(600).onSnapshot(s=>{ S.quizAns=s.docs.map(d=>({id:d.id,...d.data()})); renderQuiz(); },fail);
+  db.collection('booth').limit(20).onSnapshot(s=>{ S.booth={}; s.docs.forEach(d=>S.booth[d.id]=d.data()); loadPartnerHalf(); },fail);
+  db.collection('garden').orderBy('at','desc').limit(1500).onSnapshot(s=>{ S.garden=s.docs.map(d=>({id:d.id,...d.data()})); renderGarden(); },fail);
+  db.collection('wishes').orderBy('at','asc').limit(500).onSnapshot(s=>{ ok(); S.wishes=s.docs.map(d=>({id:d.id,...d.data()})); render('wishes'); },fail);
+  db.collection('people').limit(20).onSnapshot(s=>{ ok(); S.people={}; s.docs.forEach(d=>S.people[d.id]=d.data()); ensureMe(); renderGarden(); resolveProfiles().then(()=>renderAll()); },fail);
+  db.collection('miss').limit(20).onSnapshot(s=>{ S.miss={}; s.docs.forEach(d=>S.miss[d.id]=d.data()); renderHome(); },fail);
+  db.doc('couple/settings').onSnapshot(s=>{ S.settings=s.exists?s.data():{}; renderHome(); },fail);
+})();
+
+let ensured=false;
+async function ensureMe(){
+  if(ensured||!S.me||!S.canWrite||S.people[S.me]) return; ensured=true;
+  try{ await S.db.doc('people/'+S.me).set({name:'',tz:myTz,at:Date.now()}); }catch(e){ if(e&&e.code==='invalid_argument') setWritable(false); }
+}
+const noWrite=()=>{ if(!S.db){ toast('Хадгалах сан холбогдоогүй байна'); return true; } if(!S.canWrite){ toast('Танд бичих эрх алга'); return true; } return false; };
+const writeErr=e=>{ if(e&&e.code==='quota_exceeded') toast('Сан дүүрсэн байна. Хуучин зүйлсээс устгаарай.'); else if(e&&e.code==='invalid_argument'){ setWritable(false); toast('Бичих эрх алга'); } else toast('Хадгалж чадсангүй, дахин оролдоорой'); };
+
+/* ================================================================== */
+/*  Render                                                            */
+/* ================================================================== */
+function render(k){ ({photos:renderPhotos,letters:renderLetters,songs:renderSongs,wishes:renderWishes,videos:renderVideos,story:renderStory})[k]?.(); }
+function renderAll(){ renderPhotos(); renderLetters(); renderSongs(); renderWishes(); renderVideos(); renderStory(); renderQA(); renderMoods(); renderBoxes(); renderQuiz(); renderHome(); }
+
+// home
+function renderHome(){
+  const now=Date.now(), since=parseDay(S.settings.since), meet=parseDay(S.settings.meet);
+  const cap=$('#cap'); cap.textContent='';
+  if(since||meet){
+    if(since){ const days=Math.floor((now-since)/864e5)+1; cap.append('Хамтдаа ', el('b',null,days.toLocaleString('en')), ' дахь өдөр'); }
+    if(since&&meet) cap.append(el('br'));
+    if(meet){ const d=meet-now; if(d>0){ const dd=Math.floor(d/864e5), hh=Math.floor(d%864e5/36e5); cap.append('Уулзах хүртэл ', el('b',null,dd?`${dd} өдөр ${hh} цаг`:`${hh} цаг`)); } else if(d>-864e5) cap.append(el('b',null,'Өнөөдөр уулзана!')); else cap.append('Дараагийн уулзалтаа тохиргоонд оруулаарай'); }
+  } else { cap.append('Бид хоёрын жижигхэн булан.', el('br'), 'Зураг, захидал, дуу — бүгд энд.'); }
+  renderClocks(); renderMiss(); renderStatus(); renderCele();
+}
+function partOfDay(h){ return h<5?'шөнө':h<11?'өглөө':h<17?'өдөр':h<22?'орой':'шөнө'; }
+function renderClocks(){
+  const box=$('#clocks'); const ids=Object.keys(S.people).sort((a,b)=>a===S.me?-1:b===S.me?1:0).slice(0,2);
+  if(!ids.length){ box.hidden=true; return; }
+  box.hidden=false; box.textContent='';
+  ids.forEach((id,i)=>{ const tz=validTz(S.people[id].tz)?S.people[id].tz:myTz;
+    const parts=new Intl.DateTimeFormat('en-GB',{timeZone:tz,hour:'2-digit',minute:'2-digit',hour12:false}).format(new Date());
+    const h=+parts.slice(0,2); if(i) box.append(el('i'));
+    const s=el('span'); if(id===S.me&&S.canWrite){ const nb=el('button','nm',nameOf(id)); nb.type='button'; nb.title='Нэрээ солих'; nb.onclick=openRename; s.append(nb,' · '); } else s.append(nameOf(id)+' · '); s.append(el('b',null,parts), ' '+partOfDay(h)); box.append(s); });
+}
+function renderMiss(){
+  const p=$('#miss'), me=S.miss[S.me], pid=partnerId(), them=pid&&S.miss[pid];
+  if(them&&them.at){ p.textContent=`${nameOf(pid)} чамайг ${ago(them.at)} санасан · нийт ${them.count||0} удаа`; }
+  else if(me&&me.at){ p.textContent=`Чи ${me.count||0} удаа санасан. ${nameOf(pid)} харах болно.`; }
+  else p.textContent='Санасан үедээ зүрхэн дээр дараарай';
+  if(S.garden.length) p.textContent+=` · нугад ${S.garden.length} цэцэг`;
+}
+setInterval(()=>{ renderClocks(); renderMiss(); renderStatus(); },20000);
+setInterval(renderHome,60000);
+
+let missBusy=false;
+go.addEventListener('click',async()=>{
+  hearts(); setDisp('pulse',true); setTimeout(()=>setDisp('pulse',false),1100);
+  if(!S.db||!S.me||!S.canWrite||missBusy) return;
+  missBusy=true;
+  try{
+    const cur=S.miss[S.me]||{}; await S.db.doc('miss/'+S.me).set({count:(cur.count||0)+1,at:Date.now()});
+    if(room) room.emit('miss',{}).catch(()=>{});
+    if(valley&&valley.aheadT) await S.db.collection('garden').add({t:valley.aheadT(),d:(Math.random()*2-1)*3,by:S.me,at:Date.now()});
+    toast(`${nameOf(partnerId())}-д хүрлээ ♥ Нугад нэг цэцэг ургалаа`);
+  }catch(e){ writeErr(e); }
+  missBusy=false;
+});
+
+// photos
+const blobUrl=id=>window.__mediaUrl?window.__mediaUrl(id):'/_blob/'+encodeURIComponent(id);
+function renderPhotos(){
+  const box=$('#photos'); box.textContent='';
+  $('#photosEmpty').hidden=S.photos.length>0;
+  S.photos.forEach(p=>{ if(!p.asset) return;
+    const f=el('figure','ph-card'); const img=el('img'); img.loading='lazy'; img.alt=p.cap||'Бидний зураг'; img.src=blobUrl(p.asset);
+    if(p.w&&p.h){ img.width=p.w; img.height=p.h; }
+    f.append(img);
+    const c=el('figcaption'); if(p.cap) c.append(p.cap); c.append(el('span','meta',`${nameOf(p.by)} · ${fmtDate(p.at)}`)); f.append(c);
+    f.onclick=()=>openPhoto(p); box.append(f); });
+}
+let lbCur=null;
+function openPhoto(p){ lbCur=p; $('#lbImg').src=blobUrl(p.asset); $('#lbImg').alt=p.cap||''; $('#lbCap').textContent=p.cap||''; $('#lbMeta').textContent=`${nameOf(p.by)} · ${fmtDate(p.at)}`; $('#lbDel').hidden=!(S.canWrite&&p.by===S.me&&p.id); openModal($('#mPhoto')); }
+$('#lbDel').onclick=async()=>{ const p=lbCur; if(!p||noWrite()) return; if($('#lbDel').dataset.sure!=='1'){ $('#lbDel').dataset.sure='1'; $('#lbDel').textContent='· Дахин дарж баталгаажуулна уу'; return; }
+  $('#lbDel').dataset.sure=''; $('#lbDel').textContent='· Устгах';
+  try{ await S.db.doc('photos/'+p.id).delete(); try{ const a=await window.claude.use('assets'); if(a) await a.delete(p.asset); }catch{} closeModal($('#mPhoto')); toast('Зураг устлаа'); }catch(e){ writeErr(e); } };
+async function shrink(file){
+  try{ const bmp=await createImageBitmap(file,{imageOrientation:'from-image'}); const s=Math.min(1,2000/Math.max(bmp.width,bmp.height));
+    const c=document.createElement('canvas'); c.width=Math.round(bmp.width*s); c.height=Math.round(bmp.height*s); c.getContext('2d').drawImage(bmp,0,0,c.width,c.height);
+    const b=await new Promise(r=>c.toBlob(r,'image/jpeg',.86)); return b?{blob:b,w:c.width,h:c.height}:{blob:file}; }
+  catch{ return {blob:file}; }
+}
+$('#phFile').addEventListener('change',async e=>{
+  const files=[...e.target.files]; e.target.value=''; if(!files.length||noWrite()) return;
+  const assets=await window.claude.use('assets').catch(()=>null);
+  if(!assets){ toast('Зураг оруулах эрх алга. Эзэн нь Editor эрх өгөх хэрэгтэй.'); return; }
+  const cap=$('#phCap').value.trim().slice(0,200); let n=0;
+  for(const f of files){ toast(`Оруулж байна… ${n+1}/${files.length}`);
+    try{ const {blob,w,h}=await shrink(f); const r=await assets.upload(blob); await S.db.collection('photos').add({asset:r.id,cap,by:S.me,at:Date.now(),...(w?{w,h}:{})}); n++; }
+    catch(err){ console.error(err); writeErr(err); break; } }
+  if(n){ $('#phCap').value=''; toast(n>1?`${n} зураг нэмэгдлээ`:'Зураг нэмэгдлээ'); }
+});
+
+// letters — AES-GCM, key from the password with PBKDF2
+const te=new TextEncoder(), td=new TextDecoder();
+const b64=buf=>{ const u=new Uint8Array(buf); let s=''; for(let i=0;i<u.length;i+=0x8000) s+=String.fromCharCode.apply(null,u.subarray(i,i+0x8000)); return btoa(s); };
+const unb64=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+const normPw=p=>p.normalize('NFC').trim().toLowerCase();
+async function keyFrom(pw,salt){ const k=await crypto.subtle.importKey('raw',te.encode(normPw(pw)),'PBKDF2',false,['deriveKey']); return crypto.subtle.deriveKey({name:'PBKDF2',salt,iterations:250000,hash:'SHA-256'},k,{name:'AES-GCM',length:256},false,['encrypt','decrypt']); }
+async function seal(text,pw){ const salt=crypto.getRandomValues(new Uint8Array(16)), iv=crypto.getRandomValues(new Uint8Array(12)); const ct=await crypto.subtle.encrypt({name:'AES-GCM',iv},await keyFrom(pw,salt),te.encode(text)); return {ct:b64(ct),iv:b64(iv),salt:b64(salt)}; }
+async function unseal(l,pw){ const pt=await crypto.subtle.decrypt({name:'AES-GCM',iv:unb64(l.iv)},await keyFrom(pw,unb64(l.salt)),unb64(l.ct)); return td.decode(pt); }
+
+function renderLetters(){
+  const box=$('#letters'); box.textContent=''; $('#lettersEmpty').hidden=S.letters.length>0;
+  S.letters.forEach(l=>{
+    const locked=l.openAt&&l.openAt>Date.now();
+    const b=el('button','env'+(locked?' locked':'')); b.type='button';
+    const seal_=el('span','seal',(nameOf(l.by)[0]||'♥').toUpperCase()); b.append(seal_);
+    b.append(el('h3',null,l.title||'Нэргүй захидал'));
+    if(l.hint) b.append(el('span','hint','Сануулга: '+l.hint));
+    b.append(el('span','meta',locked?`${fmtDate(l.openAt)}-нд нээгдэнэ · ${nameOf(l.by)}`:`${l.by===S.me?'Чи бичсэн':nameOf(l.by)+'-с'} · ${ago(l.at)}`));
+    b.onclick=()=>{ if(locked&&l.by!==S.me){ toast(`Энэ захидал ${fmtDate(l.openAt)}-нд нээгдэнэ`); return; } openLetter(l); };
+    box.append(b); });
+}
+let readCur=null;
+function openLetter(l){ readCur=l; $('#readLock').hidden=false; $('#readOpen').hidden=true; $('#readOpen').textContent='';
+  $('#readTitle').textContent=l.title||'Нууц захидал'; $('#readHint').textContent=l.hint?'Сануулга: '+l.hint:'Нууц үгээ оруулна уу';
+  $('#readErr').textContent=''; $('#readForm').reset(); $('#readDel').hidden=!(S.canWrite&&l.by===S.me); $('#readDel').dataset.sure=''; $('#readDel').textContent='Энэ захидлыг устгах';
+  openModal($('#mRead')); }
+$('#readForm').addEventListener('submit',async e=>{ e.preventDefault(); const l=readCur; if(!l) return; const pw=e.target.pw.value;
+  $('#readErr').textContent='Нээж байна…';
+  try{ const text=await unseal(l,pw); $('#readErr').textContent='';
+    const paper=el('div','paper'); paper.append(el('h3',null,l.title||'')); paper.append(text); paper.append(el('p','sig',`— ${nameOf(l.by)}, ${fmtDate(l.at)}`));
+    $('#readOpen').textContent=''; $('#readOpen').append(paper); $('#readLock').hidden=true; $('#readOpen').hidden=false;
+    if(S.canWrite&&l.by!==S.me&&!(l.opened&&l.opened[S.me])){ try{ await S.db.doc('letters/'+l.id).update({opened:{[S.me]:Date.now()}}); }catch{} }
+  }catch{ $('#readErr').textContent='Нууц үг буруу байна. Сануулгаа дахин бодоорой ♥'; } });
+$('#readDel').onclick=async()=>{ const l=readCur; if(!l||noWrite()) return; const b=$('#readDel'); if(b.dataset.sure!=='1'){ b.dataset.sure='1'; b.textContent='Дахин дарж баталгаажуулна уу'; return; }
+  try{ await S.db.doc('letters/'+l.id).delete(); closeModal($('#mRead')); toast('Захидал устлаа'); }catch(e){ writeErr(e); } };
+$('#newLetter').onclick=()=>{ if(noWrite()) return; $('#writeForm').reset(); $('#writeErr').textContent=''; openModal($('#mWrite')); };
+$('#writeForm').addEventListener('submit',async e=>{ e.preventDefault(); if(noWrite()) return; const f=e.target, btn=$('#writeBtn');
+  const pw=f.pw.value; if(normPw(pw).length<3){ $('#writeErr').textContent='Нууц үг дор хаяж 3 тэмдэгт байх ёстой'; return; }
+  btn.disabled=true; $('#writeErr').textContent='';
+  try{ const sealed=await seal(f.body.value,pw); const openAt=parseDay(f.openAt.value);
+    await S.db.collection('letters').add({title:f.title.value.trim().slice(0,80),hint:f.hint.value.trim().slice(0,120),...sealed,by:S.me,at:Date.now(),...(openAt?{openAt}:{})});
+    closeModal($('#mWrite')); toast('Захидал битүүмжлэгдлээ ♥'); }
+  catch(err){ writeErr(err); }
+  btn.disabled=false; });
+
+// songs
+function renderSongs(){
+  const box=$('#songs'); box.textContent=''; $('#songsEmpty').hidden=S.songs.length>0;
+  S.songs.forEach((s,i)=>{ const r=el('div','song'); r.append(el('span','n',String(i+1).padStart(2,'0')));
+    const m=el('div'); m.append(el('h3',null,s.title||'')); m.append(el('div','ar',[s.artist,`${nameOf(s.by)} нэмсэн`].filter(Boolean).join(' · ')));
+    if(s.why) m.append(el('p','why','“'+s.why+'”')); r.append(m);
+    const acts=el('div','acts'); const u=safeUrl(s.link||''); if(u){ const a=el('a','listen','Сонсох ↗'); a.href=u; a.target='_blank'; a.rel='noopener noreferrer'; acts.append(a); }
+    if(S.canWrite&&s.by===S.me){ const d=el('button','del','Хасах'); d.onclick=async()=>{ if(d.dataset.sure!=='1'){d.dataset.sure='1';d.textContent='Итгэлтэй юу?';return;} try{ await S.db.doc('songs/'+s.id).delete(); }catch(e){ writeErr(e); } }; acts.append(d); }
+    r.append(acts); box.append(r); });
+}
+$('#songForm').addEventListener('submit',async e=>{ e.preventDefault(); if(noWrite()) return; const f=e.target; const link=f.link.value.trim();
+  if(link&&!safeUrl(link)){ toast('Холбоос https:// -ээр эхлэх ёстой'); return; }
+  try{ await S.db.collection('songs').add({title:f.title.value.trim(),artist:f.artist.value.trim(),link:link?safeUrl(link):'',why:f.why.value.trim(),by:S.me,at:Date.now()}); f.reset(); toast('Дуу нэмэгдлээ ♪'); }catch(err){ writeErr(err); } });
+
+// wishes
+function renderWishes(){
+  const box=$('#wishes'); box.textContent=''; $('#wishesEmpty').hidden=S.wishes.length>0;
+  const done=S.wishes.filter(w=>w.done).length; $('#wishCount').textContent=S.wishes.length?`Нийт ${S.wishes.length} · биелсэн ${done}`:''; $('#wishBar').style.width=S.wishes.length?(done/S.wishes.length*100)+'%':'0';
+  S.wishes.forEach(w=>{ const r=el('div','wish'+(w.done?' done':'')); const c=el('button','chk'); c.setAttribute('aria-label',w.done?'Биелээгүй болгох':'Биелсэн гэж тэмдэглэх'); c.innerHTML='<svg viewBox="0 0 16 16"><path d="M3 8.5l3.2 3L13 4.5"/></svg>';
+    c.onclick=async()=>{ if(noWrite()) return; try{ await S.db.doc('wishes/'+w.id).update({done:!w.done,doneAt:!w.done?Date.now():0}); if(!w.done){ hearts(); } }catch(e){ writeErr(e); } };
+    const t=el('div','t',w.t||''); t.append(el('div','meta',w.done&&w.doneAt?`Биелсэн · ${fmtDate(w.doneAt)}`:`${nameOf(w.by)} · ${fmtDate(w.at)}`));
+    r.append(c,t);
+    if(S.canWrite){ const d=el('button','del','Хасах'); d.onclick=async()=>{ if(d.dataset.sure!=='1'){d.dataset.sure='1';d.textContent='Итгэлтэй юу?';return;} try{ await S.db.doc('wishes/'+w.id).delete(); }catch(e){ writeErr(e); } }; r.append(d); }
+    box.append(r); });
+}
+$('#wishForm').addEventListener('submit',async e=>{ e.preventDefault(); if(noWrite()) return; const f=e.target; const t=f.t.value.trim(); if(!t) return;
+  try{ await S.db.collection('wishes').add({t,done:false,by:S.me,at:Date.now()}); f.reset(); }catch(err){ writeErr(err); } });
+
+// settings
+try{ const dl=$('#tzlist'); (Intl.supportedValuesOf?Intl.supportedValuesOf('timeZone'):['Asia/Shanghai','Asia/Ulaanbaatar','Asia/Seoul','Asia/Tokyo','Europe/London','America/New_York']).forEach(z=>{ const o=document.createElement('option'); o.value=z; dl.append(o); }); }catch{}
+function fillSettings(){ const f=$('#setForm'), me=S.people[S.me]||{}; f.name.value=me.name||''; f.tz.value=me.tz||myTz; f.bday.value=me.bday||''; f.since.value=S.settings.since||''; f.meet.value=S.settings.meet||''; $('#setMsg').textContent=''; }
+$('#setForm').addEventListener('submit',async e=>{ e.preventDefault(); if(noWrite()) return; const f=e.target;
+  const tz=f.tz.value.trim()||myTz; if(!validTz(tz)){ $('#setMsg').textContent='Цагийн бүс буруу байна (жишээ нь Asia/Shanghai)'; return; }
+  try{
+    if(S.me){ const me=S.people[S.me]||{}; const nm=f.name.value.trim().slice(0,40), bday=f.bday.value||''; if(me.name!==nm||me.tz!==tz||(me.bday||'')!==bday) await S.db.doc('people/'+S.me).set({...me,name:nm,tz,bday,at:me.at||Date.now()}); }
+    const since=f.since.value||'', meet=f.meet.value||''; if((S.settings.since||'')!==since||(S.settings.meet||'')!==meet) await S.db.doc('couple/settings').set({...S.settings,since,meet});
+    $('#setMsg').textContent='Хадгалагдлаа ♥';
+  }catch(err){ writeErr(err); } });
+
+/* ================================================================== */
+/*  Garden: every "I miss you" plants a glowing flower in the meadow  */
+/* ================================================================== */
+function renderGarden(){
+  if(!valley||!valley.setMemory) return;
+  const ids=Object.keys(S.people).sort((a,b)=>(S.people[a].at||0)-(S.people[b].at||0)||(a<b?-1:1));
+  const first=ids[0]||S.me;
+  valley.setMemory(S.garden.slice().reverse().map(g=>({id:g.id,t:+g.t||0,d:+g.d||0,warm:g.by===first,at:+g.at||0})));
+  renderMiss();
+}
+
+/* ================================================================== */
+/*  Together right now: presence, partner's glow, taps that ripple    */
+/* ================================================================== */
+let room=null, lastTouch=0, presT=null;
+const clamp1=v=>Math.max(-1,Math.min(1,+v||0));
+function ripple(fx,fy,mine){ const r=el('span','ripple'+(mine?' me':'')); r.style.left=(fx*innerWidth)+'px'; r.style.top=(fy*innerHeight)+'px'; document.body.append(r); setTimeout(()=>r.remove(),1500); }
+function updateHere(peers){
+  const others=peers.filter(p=>!p.isMe&&p.kind==='viewer');
+  $('#here').classList.toggle('on',others.length>0);
+  if(!others.length){ valley&&valley.setRemote(0,0,false); return; }
+  const p=others[0], pr=p.presence||{};
+  $('#hereTxt').textContent=`${p.by?nameOf(p.by):'Хайрт'} чинь яг одоо энд байна`;
+  if(pr.on&&typeof pr.x==='number'&&typeof pr.y==='number') valley&&valley.setRemote(clamp1(pr.x),clamp1(pr.y),true); else valley&&valley.setRemote(0,0,false);
+}
+async function startRoom(){
+  const C=window.claude; if(!C||!C.use) return;
+  room=await C.use('room').catch(()=>null); if(!room) return;
+  room.onPeers(ch=>updateHere(ch.peers),()=>{ $('#here').classList.remove('on'); });
+  room.on('touch',m=>{ if(m.isMe) return; const d=m.data||{}; const x=Math.max(0,Math.min(1,+d.x||0)), y=Math.max(0,Math.min(1,+d.y||0)); ripple(x,y,false); valley&&valley.ping(x*2-1,-(y*2-1)); },()=>{});
+  room.on('count',m=>{ if(m.sameTab) return; runCount(); },()=>{});
+  room.on('draw',m=>{ if(m.sameTab) return; remoteDraw(m.data||{}); },()=>{});
+  room.on('miss',m=>{ if(m.isMe) return; toast(`${m.by?nameOf(m.by):'Хайрт'} чамайг яг одоо санаж байна ♥`); hearts(); },()=>{});
+}
+addEventListener('pointermove',e=>{
+  if(!room) return;
+  room.presence({x:e.clientX/innerWidth*2-1,y:-(e.clientY/innerHeight*2-1),on:true}).catch(()=>{});
+  clearTimeout(presT); presT=setTimeout(()=>room&&room.presence({on:false}).catch(()=>{}), e.pointerType==='touch'?700:4000);
+});
+$('#valley').addEventListener('pointerdown',e=>{
+  const fx=e.clientX/innerWidth, fy=e.clientY/innerHeight; ripple(fx,fy,true); valley&&valley.ping(fx*2-1,-(fy*2-1));
+  const now=Date.now(); if(room&&now-lastTouch>150){ lastTouch=now; room.emit('touch',{x:fx,y:fy}).catch(()=>{}); }
+});
+
+/* ================================================================== */
+/*  What are you doing now                                            */
+/* ================================================================== */
+const STAT=[['😴','Унтаж байна'],['📚','Хичээлтэй'],['💼','Ажилтай'],['🍜','Хоол идэж байна'],['🚌','Замд явж байна'],['🎧','Дуу сонсож байна'],['🎮','Чөлөөтэй'],['🥺','Чамайг санаж байна'],['☕','Амарч байна'],['🏃','Спорт хийж байна']];
+const fresh=st=>st&&st.at&&Date.now()-st.at<12*36e5;
+function renderStatus(){
+  const pid=partnerId(), ps=pid&&S.people[pid], chip=$('#pStatus');
+  chip.hidden=true;
+  if(ps){
+    const tz=validTz(ps.tz)?ps.tz:myTz; const h=+new Intl.DateTimeFormat('en-GB',{timeZone:tz,hour:'2-digit',hour12:false}).format(new Date())%24;
+    if(fresh(ps.status)){ chip.textContent=''; chip.append(`${nameOf(pid)}: `, el('b',null,`${ps.status.e||''} ${ps.status.t||''}`.trim()), ` · ${ago(ps.status.at)}`); chip.hidden=false; }
+    else if(h<6||h>=23){ chip.textContent=`😴 ${nameOf(pid)} чинь одоо унтаж байгаа байх`; chip.hidden=false; }
+  }
+  const me=S.people[S.me]&&S.people[S.me].status, b=$('#myStatus'); b.textContent='';
+  b.append('Миний төлөв: ', el('b',null,fresh(me)?`${me.e||''} ${me.t||''}`.trim():'тавих ✎'));
+}
+STAT.forEach(([e,t])=>{ const b=el('button',null,`${e}  ${t}`); b.type='button'; b.onclick=()=>saveStatus(e,t); $('#emojis').append(b); });
+$('#myStatus').onclick=()=>{ if(noWrite()) return; openModal($('#mStatus')); };
+$('#statusForm').addEventListener('submit',e=>{ e.preventDefault(); const t=e.target.t.value.trim().slice(0,60); if(t) saveStatus('💬',t); });
+$('#statusClear').onclick=()=>saveStatus(null);
+async function saveStatus(e,t){
+  if(noWrite()||!S.me) return;
+  const me={...(S.people[S.me]||{})}; if(e) me.status={e,t,at:Date.now()}; else delete me.status;
+  try{ await S.db.doc('people/'+S.me).set(me); closeModal($('#mStatus')); $('#statusForm').reset(); toast(e?'Төлөв шинэчлэгдлээ':'Төлөв арилгалаа'); }catch(err){ writeErr(err); }
+}
+
+/* ================================================================== */
+/*  Daily question                                                     */
+/* ================================================================== */
+const QS=['Бид хоёр анх уулзахад чи юу бодсон бэ?','Надтай хамт хамгийн их очмоор байгаа газар хаана вэ?','Миний аль зан чанар чамд хамгийн их таалагддаг вэ?','Хамтдаа амьдрахад бидний гэр ямар байх вэ?','Өнөөдөр чамайг юу инээлгэсэн бэ?','Бидний хамгийн сайхан дурсамж аль нь вэ?','Хэрвээ яг одоо би хажууд чинь байсан бол бид юу хийх байсан бэ?','Чамд намайг хамгийн их санагдуулдаг дуу аль нь вэ?','Ирэх уулзалтаараа заавал хийх нэг зүйл юу вэ?','Бага насны хамгийн дуртай дурсамж чинь юу вэ?','Надад хэлж амжаагүй нэг зүйл байна уу?','Таван жилийн дараа бид хаана, юу хийж байгаа гэж төсөөлдөг вэ?','Хол байхад хамгийн хэцүү нь юу вэ?','Хол байхын сайн тал юу гэж боддог вэ?','Миний хийсэн юу чамайг хамгийн их баярлуулсан бэ?','Хамтдаа хоол хийвэл юу хийх вэ?','Хамгийн дуртай кино чинь юу, яагаад?','Нэг өдрийн турш хүссэн бүхнээ хийж чадвал юу хийх вэ?','Чиний хувьд хайр гэж юу вэ?','Би чамайг хамгийн их юугаар гайхшруулсан бэ?','Өнөөдрийн сэтгэлээ нэг өнгөөр илэрхийлбэл ямар өнгө вэ?','Бидэнд хоёулханд нь ойлгогдох нэг нууц үг зохиовол юу вэ?','Хамтдаа ямар амьтан тэжээмээр байна?','Чамайг юу хамгийн их тайвшруулдаг вэ?','Миний зургуудаас аль нь чиний хамгийн дуртай нь вэ?','Анхны уулзалтаас юу хамгийн тод санаанд үлдсэн бэ?','Надад өгөхийг хүсдэг бэлэг юу вэ?','Хамтдаа аялвал аль улс руу явах вэ?','Чи надаас юу сурсан бэ?','Мөрөөдлийн ажил чинь юу вэ?','Өнөөдөр чамд хэрэгтэй байсан нэг үг юу вэ?','Бидний дуу гэвэл аль нь вэ?','Намайг гурван үгээр тодорхойлбол?','Чи намайг ямар үед хамгийн их санадаг вэ?','Хамтдаа хөгшрөхөд бид ямар хос болох вэ?','Энэ долоо хоногт чамайг юу бахархуулсан бэ?','Хамгийн дуртай улирал чинь аль нь, яагаад?','Уулзахдаа анх надад юу хэлэх вэ?','Надад зориулж нэг мөр шүлэг бичээч.','Өнөөдөр надад хэлэх нэг талархал юу вэ?'];
+const dayNo=(ts=Date.now())=>Math.floor((ts+8*36e5)/864e5);
+const qFor=d=>QS[((d%QS.length)+QS.length)%QS.length];
+const ansBox=(who,text,empty)=>{ const d=el('div'); d.append(el('span','who',who)); if(text) d.append(text); else d.append(el('span','lock',empty)); return d; };
+function renderQA(){
+  const today=dayNo(), pid=partnerId();
+  $('#qDate').textContent=`${fmtDate(Date.now())} · өнөөдрийн асуулт`; $('#qText').textContent=qFor(today);
+  const mine=S.answers.find(a=>a.day===today&&a.by===S.me), theirs=S.answers.find(a=>a.day===today&&a.by!==S.me);
+  const f=$('#qForm'); if(mine&&document.activeElement!==f.t&&!f.t.value) f.t.value=mine.t||''; $('#qBtn').textContent=mine?'Засах':'Хариулах';
+  const box=$('#qAns'); box.textContent='';
+  box.append(ansBox(nameOf(S.me),mine&&mine.t,'Чи хараахан хариулаагүй'));
+  box.append(ansBox(nameOf(pid),theirs&&mine?theirs.t:null,theirs?'🔒 Хариулсан байна. Чи хариулбал харагдана':'Хараахан хариулаагүй'));
+  const past=$('#qPast'); past.textContent='';
+  const days=[...new Set(S.answers.map(a=>a.day))].filter(d=>d<today).sort((a,b)=>b-a);
+  $('#qPastEmpty').hidden=days.length>0;
+  days.forEach(d=>{ const m=S.answers.find(a=>a.day===d&&a.by===S.me), t=S.answers.find(a=>a.day===d&&a.by!==S.me);
+    const w=el('div','past'); w.append(el('div','meta',fmtDate(d*864e5))); w.append(el('h4',null,qFor(d)));
+    const g=el('div','ans'); g.append(ansBox(nameOf(S.me),m&&m.t,'Хариулаагүй')); g.append(ansBox(nameOf(pid),t&&t.t,'Хариулаагүй')); w.append(g); past.append(w); });
+}
+$('#qForm').addEventListener('submit',async e=>{ e.preventDefault(); if(noWrite()||!S.me) return; const t=e.target.t.value.trim(); if(!t) return;
+  const today=dayNo();
+  try{ await S.db.doc(`answers/${today}_${S.me}`).set({day:today,by:S.me,t:t.slice(0,1500),at:Date.now()}); $('#qMsg').textContent='Хадгалагдлаа ♥'; setTimeout(()=>$('#qMsg').textContent='',2500); }catch(err){ writeErr(err); } });
+setInterval(()=>{ if(location.hash==='#asuult') renderQA(); },60000);
+
+/* ================================================================== */
+/*  Video letters                                                      */
+/* ================================================================== */
+function renderVideos(){
+  const box=$('#vids'); box.textContent=''; $('#vidsEmpty').hidden=S.videos.length>0;
+  S.videos.forEach(v=>{ if(!v.asset) return;
+    const c=el('div','vid'); const vd=document.createElement('video'); vd.src=blobUrl(v.asset); vd.controls=true; vd.playsInline=true; vd.preload='metadata'; c.append(vd);
+    const m=el('div'), l=el('div'); l.append(el('h4',null,v.title||'Видео захидал')); l.append(el('span','meta',`${nameOf(v.by)} · ${ago(v.at)}`)); m.append(l);
+    if(S.canWrite&&v.by===S.me){ const d=el('button','del','Устгах'); d.onclick=async()=>{ if(d.dataset.sure!=='1'){d.dataset.sure='1';d.textContent='Итгэлтэй юу?';return;} try{ await S.db.doc('videos/'+v.id).delete(); try{ const a=await window.claude.use('assets'); if(a) await a.delete(v.asset); }catch{} }catch(e){ writeErr(e); } }; m.append(d); }
+    c.append(m); box.append(c); });
+}
+$('#vidFile').addEventListener('change',async e=>{
+  const f=e.target.files[0]; e.target.value=''; if(!f||noWrite()) return;
+  if(f.size>20*1024*1024){ toast('Бичлэг 20 MB-аас их байна. Арай богино бичлэг хийгээрэй.'); return; }
+  const assets=await window.claude.use('assets').catch(()=>null); if(!assets){ toast('Бичлэг оруулах эрх алга'); return; }
+  toast('Бичлэг илгээж байна…');
+  try{ const r=await assets.upload(f); await S.db.collection('videos').add({asset:r.id,title:$('#vidTitle').value.trim().slice(0,80),by:S.me,at:Date.now()}); $('#vidTitle').value=''; toast('Видео захидал илгээгдлээ ♥'); }
+  catch(err){ console.error(err); writeErr(err); }
+});
+
+/* ================================================================== */
+/*  Our story                                                          */
+/* ================================================================== */
+let storyImg=null;
+$('#storyFile').addEventListener('change',e=>{ storyImg=e.target.files[0]||null; $('#storyFileLbl').textContent=storyImg?'✓ Зураг сонгосон':'+ Зураг'; });
+$('#storyForm').addEventListener('submit',async e=>{ e.preventDefault(); if(noWrite()) return; const f=e.target, btn=$('#storyBtn'); btn.disabled=true;
+  try{ let asset=null;
+    if(storyImg){ const assets=await window.claude.use('assets').catch(()=>null); if(assets){ const {blob}=await shrink(storyImg); asset=(await assets.upload(blob)).id; } }
+    await S.db.collection('story').add({date:f.date.value,title:f.title.value.trim().slice(0,100),text:f.text.value.trim().slice(0,600),...(asset?{asset}:{}),by:S.me,at:Date.now()});
+    f.reset(); storyImg=null; $('#storyFileLbl').textContent='+ Зураг'; toast('Түүхэнд нэмэгдлээ ✨'); }
+  catch(err){ writeErr(err); }
+  btn.disabled=false; });
+function renderStory(){
+  const box=$('#story'); box.textContent=''; $('#storyEmpty').hidden=S.story.length>0;
+  S.story.forEach(st=>{ const w=el('div','st'); const t=parseDay(st.date);
+    w.append(el('div','dt',t?fmtDate(t):'')); w.append(el('h3',null,st.title||'')); if(st.text) w.append(el('p',null,st.text));
+    if(st.asset){ const img=el('img'); img.src=blobUrl(st.asset); img.alt=st.title||''; img.loading='lazy'; img.onclick=()=>openPhoto({asset:st.asset,cap:st.title,by:st.by,at:st.at,id:null}); w.append(img); }
+    if(S.canWrite&&st.by===S.me){ const d=el('button','del','Устгах'); d.style.marginTop='10px'; d.onclick=async()=>{ if(d.dataset.sure!=='1'){d.dataset.sure='1';d.textContent='Итгэлтэй юу?';return;} try{ await S.db.doc('story/'+st.id).delete(); }catch(e){ writeErr(e); } }; w.append(d); }
+    box.append(w); });
+}
+
+/* ================================================================== */
+/*  Shared day helpers (days counted on China time for both of us)    */
+/* ================================================================== */
+const dayOfStr=str=>{ if(!/^\d{4}-\d{2}-\d{2}$/.test(str||'')) return null; const [y,m,d]=str.split('-').map(Number); return Math.floor(Date.UTC(y,m-1,d)/864e5); };
+const strOfDay=n=>new Date(n*864e5).toISOString().slice(0,10);
+const shortOfDay=n=>{ const t=strOfDay(n); return `${t.slice(5,7)}.${t.slice(8,10)}`; };
+
+/* ================================================================== */
+/*  Moon: the same moon over both of us                               */
+/* ================================================================== */
+function moonPhase(ts=Date.now()){ const syn=29.530588853, ref=Date.UTC(2000,0,6,18,14)/864e5; const p=((ts/864e5-ref)/syn)%1; return p<0?p+1:p; }
+const moonName=p=>p<.03||p>.97?'Шинэ сар':p<.22?'Шинэдэх хавирган сар':p<.28?'Сарын эхний хагас':p<.47?'Тэргэлэх сар':p<.53?'Тэргэл сар':p<.72?'Хуучдах сар':p<.78?'Сарын сүүлийн хагас':'Хуучин хавирган сар';
+function renderMoon(){
+  const p=moonPhase(), r=40, c=Math.cos(2*Math.PI*p), rx=Math.abs(c)*r;
+  let d;
+  if(p<.5) d=`M0,${-r} A${r},${r} 0 0 1 0,${r} A${rx},${r} 0 0 ${p<.25?1:0} 0,${-r}Z`;
+  else d=`M0,${-r} A${r},${r} 0 0 0 0,${r} A${rx},${r} 0 0 ${p<.75?1:0} 0,${-r}Z`;
+  $('#moon').innerHTML=`<svg viewBox="-46 -46 92 92"><defs><radialGradient id="mg" cx="40%" cy="38%"><stop offset="0" stop-color="#fffaf0"/><stop offset="1" stop-color="#e9dfc8"/></radialGradient></defs><circle r="${r}" fill="rgba(245,239,226,.07)"/><path d="${d}" fill="url(#mg)"/></svg>`;
+  $('#moon').setAttribute('aria-label',moonName(p));
+}
+$('#moon').addEventListener('click',()=>toast(`🌙 ${moonName(moonPhase())} — бид хоёр яг нэг сарыг харж байна`));
+renderMoon(); setInterval(renderMoon,36e5);
+
+/* ================================================================== */
+/*  Special days                                                       */
+/* ================================================================== */
+let celebrated=false;
+function renderCele(){
+  const chip=$('#cele'), today=dayNo(), sinceN=dayOfStr(S.settings.since), mmdd=strOfDay(today).slice(5);
+  let msg=null, party=false;
+  for(const id of Object.keys(S.people)){ const b=S.people[id].bday; if(b&&b.slice(5)===mmdd){ msg=`🎂 Төрсөн өдрийн мэнд хүргэе, ${nameOf(id)}!`; party=true; } }
+  if(!msg&&sinceN!=null&&today>=sinceN){
+    const n=today-sinceN+1, yrs=Number(strOfDay(today).slice(0,4))-Number(S.settings.since.slice(0,4));
+    if(S.settings.since.slice(5)===mmdd&&yrs>0){ msg=`💍 Өнөөдөр бидний ${yrs} жилийн ой!`; party=true; }
+    else if(n%100===0||n===365||n===730||n===1095){ msg=`🎉 Өнөөдөр бидний ${n.toLocaleString('en')} дахь өдөр!`; party=true; }
+    else { const next=Math.ceil(n/100)*100; msg=`✨ ${next.toLocaleString('en')} дахь өдөр хүртэл ${next-n} хоног`; }
+  }
+  if(S.settings.meet&&dayOfStr(S.settings.meet)===today){ msg='💞 Өнөөдөр бид уулзана!'; party=true; }
+  chip.hidden=!msg; chip.textContent=msg||'';
+  if(party&&!celebrated&&introShown){ celebrated=true; setTimeout(()=>{ hearts(); setDisp('pulse',true); setTimeout(()=>{hearts(); setDisp('pulse',false);},2400); },800); }
+}
+
+/* ================================================================== */
+/*  3 · 2 · 1 together                                                 */
+/* ================================================================== */
+let counting=false;
+function runCount(){
+  if(counting) return; counting=true; const o=$('#count'); o.classList.add('on');
+  const seq=['3','2','1','Эхлүүл! ▶'];
+  seq.forEach((t,i)=>setTimeout(()=>{ o.textContent=''; o.append(el('span',i===3?'go2':null,t)); },i*1000));
+  setTimeout(()=>{ o.classList.remove('on'); counting=false; },4300);
+}
+$('#countBtn').onclick=()=>{ runCount(); if(room) room.emit('count',{}).catch(()=>{}); if(!$('#here').classList.contains('on')) toast('Хайрт чинь яг одоо хуудсаа нээгээгүй байна'); };
+
+/* ================================================================== */
+/*  Draw together                                                      */
+/* ================================================================== */
+const bd=$('#board'), bx=bd.getContext('2d');
+const COLS=['#2a2420','#e85d75','#f2a63b','#4a9e6b','#4f7fd9','#9b6be0','#ffffff'];
+let penC=COLS[1], penW=6, cur=null, buf=[], flushT=null; const remoteLast=new Map();
+function clearBoard(){ bx.fillStyle='#f5efe2'; bx.fillRect(0,0,bd.width,bd.height); }
+clearBoard();
+COLS.forEach((c,i)=>{ const b=el('button','sw'+(i===1?' sel':'')); b.type='button'; b.style.background=c; b.setAttribute('aria-label','Өнгө'); b.onclick=()=>{ penC=c; document.querySelectorAll('#pal .sw').forEach(x=>x.classList.toggle('sel',x===b)); }; $('#pal').append(b); });
+[['Нарийн',3],['Дунд',6],['Бүдүүн',14]].forEach(([t,w])=>{ const b=el('button','btn ghost',t); b.type='button'; b.style.height='34px'; b.onclick=()=>penW=w; $('#pal').append(b); });
+const clr=el('button','btn ghost','Цэвэрлэх'); clr.type='button'; clr.style.height='34px'; clr.onclick=()=>{ clearBoard(); if(room) room.emit('draw',{clear:1}).catch(()=>{}); }; $('#pal').append(clr);
+const sv=el('button','btn','Цомогт хадгалах'); sv.type='button'; sv.style.height='34px'; sv.dataset.write=''; sv.onclick=()=>saveCanvas(bd,'🎨 Хамтдаа зурсан'); $('#pal').append(sv);
+function seg(x,y,x2,y2,c,w){ bx.strokeStyle=c; bx.lineWidth=w; bx.lineCap='round'; bx.lineJoin='round'; bx.beginPath(); bx.moveTo(x*bd.width,y*bd.height); bx.lineTo(x2*bd.width,y2*bd.height); bx.stroke(); }
+const bpos=e=>{ const r=bd.getBoundingClientRect(); return [Math.max(0,Math.min(1,(e.clientX-r.left)/r.width)),Math.max(0,Math.min(1,(e.clientY-r.top)/r.height))]; };
+function flush(){ flushT=null; if(!buf.length||!room||!cur) return; room.emit('draw',{id:cur.id,c:cur.c,w:cur.w,p:buf.splice(0).map(v=>Math.round(v*1000)/1000)}).catch(()=>{}); }
+bd.addEventListener('pointerdown',e=>{ e.preventDefault(); bd.setPointerCapture(e.pointerId); const [x,y]=bpos(e); cur={id:Math.random().toString(36).slice(2,8),c:penC,w:penW,x,y}; seg(x,y,x,y,penC,penW); buf.push(x,y); if(!flushT) flushT=setTimeout(flush,90); });
+bd.addEventListener('pointermove',e=>{ if(!cur) return; const [x,y]=bpos(e); seg(cur.x,cur.y,x,y,cur.c,cur.w); cur.x=x; cur.y=y; buf.push(x,y); if(!flushT) flushT=setTimeout(flush,90); });
+const endStroke=()=>{ if(!cur) return; flush(); cur=null; };
+bd.addEventListener('pointerup',endStroke); bd.addEventListener('pointercancel',endStroke);
+function remoteDraw(d){
+  if(d.clear){ clearBoard(); remoteLast.clear(); return; }
+  const c=COLS.includes(d.c)?d.c:'#e85d75', w=Math.max(1,Math.min(20,+d.w||6)), p=Array.isArray(d.p)?d.p.map(Number):[];
+  let last=remoteLast.get(d.id);
+  for(let i=0;i+1<p.length;i+=2){ const x=Math.max(0,Math.min(1,p[i])), y=Math.max(0,Math.min(1,p[i+1])); seg(last?last[0]:x,last?last[1]:y,x,y,c,w); last=[x,y]; }
+  if(last) remoteLast.set(String(d.id).slice(0,12),last);
+  $('#drawWho').textContent='Хайрт чинь зурж байна…'; clearTimeout(remoteDraw.t); remoteDraw.t=setTimeout(()=>$('#drawWho').textContent='',2500);
+}
+async function saveCanvas(cv,cap){
+  if(noWrite()) return; const assets=await window.claude.use('assets').catch(()=>null); if(!assets){ toast('Хадгалах эрх алга'); return; }
+  toast('Хадгалж байна…');
+  try{ const blob=await new Promise(r=>cv.toBlob(r,'image/jpeg',.9)); const r=await assets.upload(blob); await S.db.collection('photos').add({asset:r.id,cap,by:S.me,at:Date.now(),w:cv.width,h:cv.height}); toast('Зургийн цомогт хадгалагдлаа ♥'); }
+  catch(err){ console.error(err); writeErr(err); }
+}
+
+/* ================================================================== */
+/*  How well do you know me                                            */
+/* ================================================================== */
+function renderQuiz(){
+  const pid=partnerId(), theirs=S.quiz.filter(q=>q.by!==S.me), mine=S.quiz.filter(q=>q.by===S.me);
+  const ansOf=(qid,uid)=>S.quizAns.find(a=>a.qid===qid&&a.by===uid);
+  let myRight=0,myDone=0,theirRight=0,theirDone=0;
+  const tBox=$('#qzTheirs'); tBox.textContent=''; $('#qzEmpty').hidden=theirs.length>0;
+  theirs.forEach(q=>{ const a=ansOf(q.id,S.me); if(a){ myDone++; if(a.pick===q.a) myRight++; }
+    const w=el('div','qz'); w.append(el('h4',null,q.q||'')); const g=el('div','opts');
+    (q.o||[]).forEach((o,i)=>{ if(!o) return; const b=el('button','opt',o); b.type='button';
+      if(a){ b.disabled=true; if(i===q.a) b.classList.add('right'); else if(i===a.pick) b.classList.add('wrong'); }
+      else b.onclick=async()=>{ if(noWrite()) return; try{ await S.db.doc(`quizAns/${q.id}_${S.me}`).set({qid:q.id,by:S.me,pick:i,at:Date.now()}); toast(i===q.a?'Зөв! 💞':'Буруу… дараа нь асуугаарай 😄'); }catch(e){ writeErr(e); } };
+      g.append(b); });
+    w.append(g); tBox.append(w); });
+  const mBox=$('#qzMine'); mBox.textContent='';
+  if(!mine.length) mBox.append(el('p','meta','Өөрийнхөө тухай анхны асуултаа нэмээрэй.'));
+  mine.forEach(q=>{ const a=pid&&ansOf(q.id,pid); if(a){ theirDone++; if(a.pick===q.a) theirRight++; }
+    const w=el('div','qz'); w.append(el('h4',null,q.q||''));
+    w.append(el('p','meta',`Зөв хариулт: ${(q.o||[])[q.a]||''} · `+(a?(a.pick===q.a?`${nameOf(pid)} зөв хариулсан ✓`:`${nameOf(pid)} «${(q.o||[])[a.pick]||''}» гэж хариулсан`):`${nameOf(pid)} хараахан хариулаагүй`)));
+    const d=el('button','del','Устгах'); d.style.marginTop='8px'; d.onclick=async()=>{ if(d.dataset.sure!=='1'){d.dataset.sure='1';d.textContent='Итгэлтэй юу?';return;} try{ await S.db.doc('quiz/'+q.id).delete(); }catch(e){ writeErr(e); } }; if(S.canWrite) w.append(d);
+    mBox.append(w); });
+  const sc=$('#qzScore'); sc.textContent='';
+  if(myDone) sc.append(el('span','chip',`Чи ${nameOf(pid)}-г ${myRight}/${myDone} мэднэ`));
+  if(theirDone) sc.append(el('span','chip',`${nameOf(pid)} чамайг ${theirRight}/${theirDone} мэднэ`));
+}
+$('#qzForm').addEventListener('submit',async e=>{ e.preventDefault(); if(noWrite()) return; const f=e.target;
+  const o=[f.o0.value,f.o1.value,f.o2.value,f.o3.value].map(v=>v.trim().slice(0,60)); let a=+f.querySelector('input[name=a]:checked').value;
+  if(!o[a]){ toast('Зөв хариултаа бөглөөрэй'); return; }
+  try{ await S.db.collection('quiz').add({q:f.q.value.trim().slice(0,140),o,a,by:S.me,at:Date.now()}); f.reset(); toast('Асуулт нэмэгдлээ'); }catch(err){ writeErr(err); } });
+
+/* ================================================================== */
+/*  Boxes until we meet                                                */
+/* ================================================================== */
+let boxCur=null, boxImg=null;
+function renderBoxes(){
+  const box=$('#boxes'), note=$('#boxNote'); box.textContent='';
+  const today=dayNo(), meetN=dayOfStr(S.settings.meet);
+  if(meetN==null||meetN<today){ note.hidden=false; note.textContent='Тохиргоо хэсэгт дараагийн уулзах өдрөө оруулбал өдөр бүрийн хайрцаг энд гарч ирнэ.'; return; }
+  note.hidden=true;
+  const last=Math.min(meetN,today+120);
+  for(let n=today;n<=last;n++){
+    const mine=S.boxes.find(b=>b.n===n&&b.by===S.me), theirs=S.boxes.find(b=>b.n===n&&b.by!==S.me), open=n<=today;
+    const b=el('button','box'+(theirs&&open?' ready':'')+(n===meetN?' meet':'')); b.type='button';
+    b.append(el('span','bd',shortOfDay(n)));
+    b.append(el('span','bi',n===meetN?'💞':theirs?(open?'🎁':'🔒'):'·'));
+    b.append(el('span','bl',n===today?'Өнөөдөр':n===meetN?'Уулзах өдөр':`${n-today} хоногийн дараа`));
+    if(mine) b.append(el('span','mine','✓ миний'));
+    b.onclick=()=>openBox(n,mine,theirs,open);
+    box.append(b);
+  }
+}
+function openBox(n,mine,theirs,open){
+  boxCur={n,mine}; boxImg=null; $('#boxFileLbl').textContent='+ Зураг';
+  $('#boxTitle').textContent=`${shortOfDay(n)} · ${n===dayNo()?'өнөөдрийн':''} хайрцаг`;
+  const v=$('#boxView'); v.textContent='';
+  if(theirs&&open){ const p=el('div','paper'); p.style.marginTop='0'; p.append(el('h3',null,`💌 ${nameOf(theirs.by)} → чамд`)); if(theirs.t) p.append(theirs.t); if(theirs.asset){ const im=el('img'); im.src=blobUrl(theirs.asset); im.style.cssText='display:block;max-width:100%;border-radius:8px;margin-top:16px'; p.append(im); } v.append(p); v.append(el('p','meta','Доор нь чи ч бас тэр өдрийн хайрцгаа хийж болно.')); v.lastChild.style.margin='14px 0 8px'; }
+  else if(theirs) v.append(el('p','note',`🔒 ${nameOf(theirs.by)} энэ өдөрт хайрцаг бэлдсэн байна. ${shortOfDay(n)}-нд нээгдэнэ.`));
+  const f=$('#boxForm'); f.hidden=!S.canWrite; f.t.value=mine?mine.t||'':''; $('#boxBtn').textContent=mine?'Шинэчлэх':'Хайрцагт хийх'; $('#boxDel').hidden=!mine;
+  openModal($('#mBox'));
+}
+$('#boxFile').addEventListener('change',e=>{ boxImg=e.target.files[0]||null; $('#boxFileLbl').textContent=boxImg?'✓ Зураг сонгосон':'+ Зураг'; });
+$('#boxForm').addEventListener('submit',async e=>{ e.preventDefault(); if(noWrite()||!boxCur) return; const t=e.target.t.value.trim().slice(0,2000); const btn=$('#boxBtn');
+  if(!t&&!boxImg&&!(boxCur.mine&&boxCur.mine.asset)){ toast('Хайрцагт юм хий 🙂'); return; }
+  btn.disabled=true;
+  try{ let asset=boxCur.mine&&boxCur.mine.asset||null;
+    if(boxImg){ const assets=await window.claude.use('assets').catch(()=>null); if(assets){ const {blob}=await shrink(boxImg); asset=(await assets.upload(blob)).id; } }
+    await S.db.doc(`boxes/${boxCur.n}_${S.me}`).set({n:boxCur.n,by:S.me,t,...(asset?{asset}:{}),at:Date.now()});
+    closeModal($('#mBox')); toast('Хайрцаг бэлэн боллоо 🎁'); }
+  catch(err){ writeErr(err); }
+  btn.disabled=false; });
+$('#boxDel').onclick=async()=>{ if(noWrite()||!boxCur) return; try{ await S.db.doc(`boxes/${boxCur.n}_${S.me}`).delete(); closeModal($('#mBox')); }catch(e){ writeErr(e); } };
+
+/* ================================================================== */
+/*  Mood calendar                                                      */
+/* ================================================================== */
+const MOODS=[['#ffd36e','Баяртай'],['#f7b6c8','Хайртай'],['#9fd8b0','Тайван'],['#c7a6ff','Санасан'],['#8fb8ff','Гунигтай'],['#ff9a6b','Ядарсан'],['#ff6b7f','Ууртай'],['#e8e3d6','Энгийн']];
+let calMonth=null;
+function renderMoods(){
+  const today=dayNo(), mine=S.moods.find(m=>m.day===today&&m.by===S.me);
+  const box=$('#moods'); box.textContent='';
+  MOODS.forEach(([c,t],i)=>{ const b=el('button','mood'+(mine&&mine.c===i?' sel':'')); b.type='button'; const dot=el('i'); dot.style.background=c; b.append(dot,t); b.hidden=!S.canWrite&&!(mine&&mine.c===i);
+    b.onclick=async()=>{ if(noWrite()) return; try{ await S.db.doc(`moods/${today}_${S.me}`).set({day:today,by:S.me,c:i,at:Date.now()}); }catch(e){ writeErr(e); } }; box.append(b); });
+  const t=strOfDay(today); if(!calMonth) calMonth=t.slice(0,7);
+  const [y,m]=calMonth.split('-').map(Number); $('#calTitle').textContent=`${y} оны ${m}-р сар`;
+  const cal=$('#cal'); cal.textContent='';
+  ['Да','Мя','Лх','Пү','Ба','Бя','Ня'].forEach(w=>cal.append(el('div','wd',w)));
+  const first=Math.floor(Date.UTC(y,m-1,1)/864e5), dim=new Date(Date.UTC(y,m,0)).getUTCDate(), lead=(new Date(first*864e5).getUTCDay()+6)%7;
+  for(let i=0;i<lead;i++) cal.append(el('div'));
+  const pid=partnerId();
+  for(let d=0;d<dim;d++){ const n=first+d, c=el('div','cd'+(n===today?' today':'')); c.append(String(d+1));
+    const a=S.moods.find(x=>x.day===n&&x.by===S.me), b=pid&&S.moods.find(x=>x.day===n&&x.by===pid);
+    if(a||b){ const dots=el('div','dots'); [a,b].forEach(x=>{ if(!x) return; const i=el('i'); const col=(MOODS[x.c]||MOODS[7])[0]; i.style.background=col; i.style.color=col; dots.append(i); }); c.append(dots);
+      c.title=[a&&`${nameOf(S.me)}: ${(MOODS[a.c]||MOODS[7])[1]}`,b&&`${nameOf(pid)}: ${(MOODS[b.c]||MOODS[7])[1]}`].filter(Boolean).join(' · '); }
+    cal.append(c); }
+  const pm=pid&&S.moods.find(x=>x.day===today&&x.by===pid);
+  $('#calLegend').textContent=pm?`Өнөөдөр ${nameOf(pid)}: ${(MOODS[pm.c]||MOODS[7])[1]}`:'Зүүн цэг — чи, баруун цэг — хайрт чинь';
+}
+$('#calPrev').onclick=()=>{ const [y,m]=calMonth.split('-').map(Number); const d=new Date(Date.UTC(y,m-2,1)); calMonth=d.toISOString().slice(0,7); renderMoods(); };
+$('#calNext').onclick=()=>{ const [y,m]=calMonth.split('-').map(Number); const d=new Date(Date.UTC(y,m,1)); calMonth=d.toISOString().slice(0,7); renderMoods(); };
+
+/* ================================================================== */
+/*  Photo booth                                                        */
+/* ================================================================== */
+const B={mode:'two',filter:'none',frame:'cream',four:[null,null,null,null],me:null,them:null,themAsset:null,slot:0};
+const bcv=$('#boothCv'), bcx=bcv.getContext('2d');
+const FR={cream:['#f5efe2','#2a2420'],pink:['#f6c9d4','#5a2a3a'],black:['#141414','#f5efe2']};
+function pickSeg(id,key){ $(id).querySelectorAll('button').forEach(b=>b.onclick=()=>{ B[key]=b.dataset.v; $(id).querySelectorAll('button').forEach(x=>x.classList.toggle('sel',x===b)); renderSlots(); drawBooth(); }); }
+pickSeg('#bMode','mode'); pickSeg('#bFilter','filter'); pickSeg('#bFrame','frame');
+$('#bCap').addEventListener('input',()=>drawBooth());
+function renderSlots(){
+  const box=$('#bSlots'); box.textContent='';
+  const add=(t,i,done)=>{ const b=el('button','btn'+(done?' ghost':''),(done?'✓ ':'')+t); b.type='button'; b.onclick=()=>{ B.slot=i; $('#boothFile').click(); }; box.append(b); };
+  if(B.mode==='two'){ add('Миний кадрыг авах',-1,!!B.me); box.append(el('p','meta',B.them?`✓ ${nameOf(partnerId())}-ийн кадр бэлэн`:`${nameOf(partnerId())} кадраа авахыг хүлээж байна. Энэ хэсгийг нээгээд «Миний кадр» дээр дарахыг хэлээрэй.`)); }
+  else [0,1,2,3].forEach(i=>add(`${i+1}-р кадр`,i,!!B.four[i]));
+}
+$('#boothFile').addEventListener('change',async e=>{ const f=e.target.files[0]; e.target.value=''; if(!f) return;
+  const {blob}=await shrink(f); const img=await loadImg(URL.createObjectURL(blob));
+  if(B.slot===-1){ B.me=img; if(S.canWrite&&S.me){ try{ const a=await window.claude.use('assets').catch(()=>null); if(a){ const r=await a.upload(blob); await S.db.doc('booth/'+S.me).set({asset:r.id,at:Date.now()}); toast(`Таны кадр ${nameOf(partnerId())}-д харагдлаа`); } }catch(err){ console.error(err); } } }
+  else B.four[B.slot]=img;
+  renderSlots(); drawBooth(); });
+const loadImg=src=>new Promise((res,rej)=>{ const i=new Image(); if(/^https?:/.test(src)) i.crossOrigin='anonymous'; i.onload=()=>res(i); i.onerror=rej; i.src=src; });
+async function loadPartnerHalf(){ const pid=partnerId(), h=pid&&S.booth[pid]; if(!h||!h.asset||h.asset===B.themAsset) return; B.themAsset=h.asset; try{ B.them=await loadImg(blobUrl(h.asset)); renderSlots(); drawBooth(); }catch{} }
+function cover(ctx,img,x,y,w,h){ const s=Math.max(w/img.width,h/img.height), sw=w/s, sh=h/s; ctx.drawImage(img,(img.width-sw)/2,(img.height-sh)/2,sw,sh,x,y,w,h); }
+function shot(img,x,y,w,h,label){
+  const fg=FR[B.frame][1];
+  if(!img){ bcx.fillStyle='rgba(0,0,0,.08)'; bcx.fillRect(x,y,w,h); bcx.fillStyle=fg; bcx.globalAlpha=.45; bcx.font=`500 ${Math.round(w/16)}px Manrope,sans-serif`; bcx.textAlign='center'; bcx.fillText(label,x+w/2,y+h/2); bcx.globalAlpha=1; return; }
+  const o=document.createElement('canvas'); o.width=w; o.height=h; const c=o.getContext('2d'); cover(c,img,0,0,w,h);
+  if(B.filter!=='none'){ const d=c.getImageData(0,0,w,h), p=d.data;
+    for(let i=0;i<p.length;i+=4){ let r=p[i],g=p[i+1],b=p[i+2];
+      if(B.filter==='bw'){ const l=.3*r+.59*g+.11*b; r=g=b=(l-128)*1.15+128; }
+      else if(B.filter==='warm'){ r=r*1.08+10; g=g*1.02+4; b=b*.88; }
+      else { const l=.3*r+.59*g+.11*b; r=(r*.8+l*.2-128)*1.12+138; g=(g*.8+l*.2-128)*1.08+128; b=(b*.8+l*.2-128)*1.0+112; const n=(Math.random()-.5)*26; r+=n; g+=n; b+=n; }
+      p[i]=r; p[i+1]=g; p[i+2]=b; }
+    c.putImageData(d,0,0);
+    if(B.filter==='film'){ const gr=c.createRadialGradient(w/2,h/2,Math.min(w,h)*.3,w/2,h/2,Math.max(w,h)*.75); gr.addColorStop(0,'rgba(0,0,0,0)'); gr.addColorStop(1,'rgba(0,0,0,.45)'); c.fillStyle=gr; c.fillRect(0,0,w,h); } }
+  bcx.drawImage(o,x,y);
+}
+function drawBooth(){
+  const [bg,fg]=FR[B.frame], cap=$('#bCap').value.trim()||'Бид хоёрын булан', date=fmtDate(Date.now());
+  if(B.mode==='two'){
+    bcv.width=1240; bcv.height=900; bcx.fillStyle=bg; bcx.fillRect(0,0,1240,900);
+    shot(B.me,30,30,580,725,nameOf(S.me)); shot(B.them,630,30,580,725,nameOf(partnerId()));
+    bcx.fillStyle=bg; bcx.beginPath(); bcx.arc(620,392,34,0,7); bcx.fill(); bcx.fillStyle='#e85d75'; bcx.font='38px serif'; bcx.textAlign='center'; bcx.textBaseline='middle'; bcx.fillText('♥',620,394);
+    bcx.textBaseline='alphabetic'; bcx.fillStyle=fg; bcx.font='400 52px Antonio,Oswald,"Arial Narrow",sans-serif'; bcx.fillText(cap,620,836); bcx.globalAlpha=.6; bcx.font='500 20px Manrope,sans-serif'; bcx.fillText(date,620,872); bcx.globalAlpha=1;
+  } else {
+    bcv.width=600; bcv.height=1880; bcx.fillStyle=bg; bcx.fillRect(0,0,600,1880);
+    for(let i=0;i<4;i++) shot(B.four[i],30,30+i*425,540,405,`${i+1}`);
+    bcx.fillStyle=fg; bcx.textAlign='center'; bcx.font='400 48px Antonio,Oswald,"Arial Narrow",sans-serif'; bcx.fillText(cap,300,1786); bcx.globalAlpha=.6; bcx.font='500 20px Manrope,sans-serif'; bcx.fillText(date,300,1826); bcx.globalAlpha=1;
+  }
+}
+$('#bSave').onclick=()=>{ const ready=B.mode==='two'?(B.me||B.them):B.four.some(Boolean); if(!ready){ toast('Эхлээд кадраа аваарай 📸'); return; } saveCanvas(bcv,'📸 '+($('#bCap').value.trim()||'Фото бүхээг')); };
+
+function openRename(){ if(noWrite()) return; const f=$('#nameForm'); f.n.value=(S.people[S.me]&&S.people[S.me].name)||''; openModal($('#mName')); }
+$('#nameForm').addEventListener('submit',async e=>{ e.preventDefault(); if(noWrite()||!S.me) return; const n=e.target.n.value.trim().slice(0,40); if(!n) return;
+  try{ await S.db.doc('people/'+S.me).set({...(S.people[S.me]||{}),name:n}); closeModal($('#mName')); toast(`Одоо чамайг «${n}» гэж харуулна`); }catch(err){ writeErr(err); } });
+
+renderAll();
+startRoom();
+</script>
+</body>
+</html>
